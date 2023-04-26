@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { ButtonTheme } from "./ButtonChakra";
+import ButtonTheme from "./ButtonTheme";
 
 const theme = extendTheme({
   config: {
@@ -7,35 +7,60 @@ const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
-      primary_100: {
-        _light: "#ff6600",
-        _dark: "#1d1f21",
+      primary_cor: {
+        _light: "grey2",
+        _dark: "brand1",
       },
-      primary_200: {
-        _light: "#1d1f21",
-        _dark: "#ff6600",
-      },
-      text: {
-        _light: "#1d1f21",
-        _dark: "#f5f5f5",
-      },
-      error: {},
     },
+  },
+  colors: {
+    brand1: "#FF6600",
+    brand2: "#ff983f",
+
+    grey0: "#0A0A0B",
+    grey1: "#1D1F21",
+    grey2: "#2c2e30",
+    grey3: "#444648",
+    grey4: "#929292",
+    grey5: "#e0e0e0",
+
+    whiteFixed: "#ffffff",
   },
   components: {
     Button: ButtonTheme,
   },
+  sizes: {
+    container: "75rem",
+    containerTablet: "40rem",
+  },
+  fonts: {
+    titles: '"IBM Plex Sans", sans-serif;',
+    texts: '"Inter", sans-serif',
+  },
+  fontSizes: {
+    title1: "2.75rem",
+    title2: "1.75rem",
+    title3: "1.50rem",
+    title4: "1.25rem",
+    text1: "1rem",
+    text2: "0.875rem",
+  },
+  lineHeights: {
+    title1: "3.8rem",
+    title2: "2.75rem",
+    title3: "2.5rem",
+    title4: "1.25rem",
+    text1: "1.75rem",
+    text2: "1.75rem",
+  },
+
+  styles: {
+    global: {
+      "html, body": {
+        fontFamily: "texts",
+      },
+    },
+  },
 });
 
 export default theme;
-
-// primary_100: "#ff6600",
-// primary_200: "#ff983f",
-// primary_300: "#ffffa1",
-// accent_100: "#f5f5f5",
-// accent_200: "#929292",
-// text_100: "#ffffff",
-// text_200: "#e0e0e0",
-// bg_100: "#1d1f21",
-// bg_200: "#2c2e30",
-// bg_300: "#444648",
