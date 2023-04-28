@@ -1,13 +1,13 @@
 import { defineStyleConfig } from "@chakra-ui/react";
 
-const ButtonTheme = defineStyleConfig({
+const cuttonTheme = defineStyleConfig({
   baseStyle: {},
 
   sizes: {},
 
   variants: {
     primary: {
-      bg: "primary_cor",
+      bg: "primary_bg",
       color: "whiteFixed",
     },
   },
@@ -15,4 +15,4 @@ const ButtonTheme = defineStyleConfig({
   defaultProps: {},
 });
 
-export default ButtonTheme;
+export default cuttonTheme;
