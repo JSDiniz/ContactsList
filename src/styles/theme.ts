@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import ButtonTheme from "./ButtonTheme";
+import cuttonTheme from "./ButtonTheme";
 
 const theme = extendTheme({
   config: {
@@ -7,9 +7,13 @@ const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
-      primary_cor: {
+      primary_bg: {
         _light: "grey2",
         _dark: "brand1",
+      },
+      primary_text: {
+        _light: "grey0",
+        _dark: "whiteFixed",
       },
     },
   },
@@ -25,9 +29,65 @@ const theme = extendTheme({
     grey5: "#e0e0e0",
 
     whiteFixed: "#ffffff",
+    biSun: "#F2C94C",
   },
   components: {
-    Button: ButtonTheme,
+    Button: cuttonTheme,
+    Text: {
+      variants: {
+        "Heading-1-700": {
+          fontWeight: "700",
+          fontSize: "44px",
+          lineHeight: "56px",
+          color: "primary_text",
+        },
+        "Heading-2-600": {
+          fontWeight: "600",
+          fontSize: "36px",
+          lineHeight: "45px",
+          color: "primary_text",
+        },
+        "Heading-3-600": {
+          fontWeight: "600",
+          fontSize: "32px",
+          lineHeight: "40px",
+          color: "primary_text",
+        },
+        "Heading-3-500": {
+          fontWeight: "500",
+          fontSize: "32px",
+          lineHeight: "40px",
+        },
+      },
+    },
+    Link: {
+      variants: {
+        link: {
+          padding: "8px 16px",
+          bg: "transparent",
+          color: "grey_scale.grey0",
+          borderRadius: "base",
+          fontWeight: "bold",
+          _hover: {
+            textDecoration: "none",
+            bg: "grey_scale.grey8",
+          },
+        },
+        outline1: {
+          padding: "8px 16px",
+          bg: "transparent",
+          color: "grey_scale.grey0",
+          borderRadius: "base",
+          borderWidth: "1.5px",
+          borderColor: "grey_scale.grey0",
+          textAlign: "center",
+          fontWeight: "bold",
+          _hover: {
+            textDecoration: "none",
+          },
+        },
+      },
+    },
   },
   sizes: {
     container: "75rem",
@@ -58,9 +118,18 @@ const theme = extendTheme({
     global: {
       "html, body": {
         fontFamily: "texts",
+        minW: "100vw",
+        overflow: "hidden",
+      },
+      "#root": {
+        w: "100%",
+        display: "flex",
+        justifyContent: "center",
       },
     },
   },
 });
+
+const variants = () => {};
 
 export default theme;
