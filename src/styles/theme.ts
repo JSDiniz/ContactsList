@@ -4,6 +4,7 @@ import cuttonTheme from "./ButtonTheme";
 const theme = extendTheme({
   config: {
     initialColorMode: "dark",
+    useSystemColorMode: false,
   },
   semanticTokens: {
     colors: {
@@ -18,18 +19,16 @@ const theme = extendTheme({
     },
   },
   colors: {
-    brand1: "#FF6600",
+    brand1: "#FF724c",
     brand2: "#ff983f",
+    brand3: "#FDBF50",
 
     grey0: "#0A0A0B",
     grey1: "#1D1F21",
-    grey2: "#2c2e30",
-    grey3: "#444648",
-    grey4: "#929292",
-    grey5: "#e0e0e0",
+    grey2: "#2A2C41",
+    grey3: "#929292",
 
-    whiteFixed: "#ffffff",
-    biSun: "#F2C94C",
+    whiteFixed: "#F4F4F8",
   },
   components: {
     Button: cuttonTheme,
@@ -55,7 +54,7 @@ const theme = extendTheme({
         },
         "Heading-3-500": {
           fontWeight: "500",
-          fontSize: "32px",
+          fontSize: ["1.25rem", "1.45rem", "2rem"],
           lineHeight: "40px",
         },
       },
@@ -119,10 +118,12 @@ const theme = extendTheme({
       "html, body": {
         fontFamily: "texts",
         minW: "100vw",
-        overflow: "hidden",
+        minH: "100vh",
+        overflowX: "hidden",
       },
       "#root": {
         w: "100%",
+        h: "100%",
         display: "flex",
         justifyContent: "center",
       },
