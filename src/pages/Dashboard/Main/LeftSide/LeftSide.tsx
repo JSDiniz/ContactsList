@@ -1,4 +1,4 @@
-import { Box, Image, SlideFade } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import foto from "../../../../assets/Select-pana.png";
 
 const LeftSide = () => {
