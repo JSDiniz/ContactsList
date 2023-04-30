@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { items } from "../Navigation";
+import { Link } from "react-router-dom";
 const NavMobile = () => {
   return (
     <Menu>
@@ -20,7 +21,9 @@ const NavMobile = () => {
       />
       <MenuList>
         {items.map((item, index) => (
-          <MenuItem key={index}>{item}</MenuItem>
+          <MenuItem key={index}>
+            <Link to={item.link}>{item.route}</Link>
+          </MenuItem>
         ))}
       </MenuList>
     </Menu>

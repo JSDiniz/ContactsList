@@ -1,6 +1,11 @@
-import { List, ListItem, Link } from "@chakra-ui/react";
+import { List, ListItem } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-export const items = ["Home", "Login", "Cadastro"];
+export const items = [
+  { route: "Home", link: "/" },
+  { route: "Login", link: "/login" },
+  { route: "Cadastro", link: "#" },
+];
 
 const Navigation = () => {
   return (
@@ -11,7 +16,7 @@ const Navigation = () => {
     >
       {items.map((item, index) => (
         <ListItem key={index}>
-          <Link textDecor="none">{item}</Link>
+          <Link to={item.link}>{item.route}</Link>
         </ListItem>
       ))}
     </List>
