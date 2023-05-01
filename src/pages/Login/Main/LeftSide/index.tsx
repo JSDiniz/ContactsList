@@ -6,10 +6,7 @@ const LeftSide = () => {
     <Box
       display={["none", "none", "unset", "unset"]}
       boxSize={["sm", "sm", "md", "md"]}
-      w={"full"}
-      h={"full"}
-      pr={["10px", "10px", "0", "0"]}
-      order={["2", "2", "1", "1"]}
+      w={"50%"}
     >
       <Image src={foto} rounded={"md"} shadow={"lg"} />
     </Box>
