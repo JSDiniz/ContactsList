@@ -8,22 +8,22 @@ const cuttonTheme = defineStyleConfig({
   variants: {
     toEnter: {
       w: "262px",
-      bg: "brand1",
+      bg: "orange.600",
       color: "whiteFixed",
       fontSize: "16px",
       fontWeight: "normal",
       border: "2px ",
-      borderColor: "brand1",
-      _hover: { bg: "transparent", color: "brand1" },
+      borderColor: "orange.600",
+      _hover: { bg: "transparent", color: "orange.600" },
     },
     register: {
       w: "262px",
-      color: "brand1",
+      color: "orange.600",
       fontSize: "16px",
       fontWeight: "normal",
       border: "2px ",
-      borderColor: "brand1",
-      _hover: { bg: "brand1", color: "whiteFixed" },
+      borderColor: "orange.600",
+      _hover: { bg: "orange.600", color: "grey.100" },
     },
   },
 
