@@ -1,5 +1,6 @@
-import { VStack, Stack, Heading, Link, Button } from "@chakra-ui/react";
+import { VStack, Stack, Heading, Button, Text } from "@chakra-ui/react";
 import Forms from "../../../../components/Forms/intex";
+import { Link } from "react-router-dom";
 
 const RightSide = () => {
   return (
@@ -31,8 +32,17 @@ const RightSide = () => {
           placeholder={"Digite seu Senha"}
         />
         <Button variant={"toEnter"}>Entrar</Button>
-        <Link fontSize={"14px"} fontWeight={"normal"}>
-          Ainda não possui uma conta?
+
+        <Link to={"/register"}>
+          <Text
+            fontSize={"14px"}
+            fontWeight={"normal"}
+            borderBottom={"1px"}
+            borderColor={"transparent"}
+            _hover={{ borderBottom: "1px", borderColor: "whiteFixed" }}
+          >
+            Ainda não possui uma conta?
+          </Text>
         </Link>
         <Button variant={"register"}>Cadastre-se</Button>
       </Stack>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const items = [
   { route: "Home", link: "/" },
   { route: "Login", link: "/login" },
-  { route: "Cadastro", link: "#" },
+  { route: "Cadastro", link: "/register" },
 ];
 
 const Navigation = () => {
