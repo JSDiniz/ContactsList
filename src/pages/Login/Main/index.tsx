@@ -8,6 +8,7 @@ const Main = () => {
       as={"main"}
       minH="calc(100vh - 5rem - 3.125rem)"
       w={"full"}
+      gap={5}
       alignItems={"center"}
       justifyContent={[
         "space-around",
