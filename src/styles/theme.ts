@@ -13,11 +13,11 @@ const theme = extendTheme({
         _dark: "brand1",
       },
       primary_text: {
-        _light: "grey0",
+        _light: "grey1",
         _dark: "whiteFixed",
       },
 
-      primary_text2: {
+      secondary_text: {
         _light: "brand1",
         _dark: "whiteFixed",
       },
