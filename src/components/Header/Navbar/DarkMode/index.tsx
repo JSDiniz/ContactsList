@@ -15,7 +15,7 @@ const DarkMode = () => {
       {colorMode == "dark" ? (
         <Icon as={FaMoon} fontSize={"xl"} />
       ) : (
-        <Icon as={BiSun} fontSize={"xl"} color={"brand3"} />
+        <Icon as={BiSun} fontSize={"xl"} color={"yellow.400"} />
       )}
     </Box>
   );
