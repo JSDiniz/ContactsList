@@ -16,7 +16,10 @@ const RightSide = () => {
         maxW={["250px", "350px", "unset"]}
         pt={["30px", "30px", "0", "0"]}
       >
-        <Highlight query={["Contacts", "List"]} styles={{ color: "brand1" }}>
+        <Highlight
+          query={["Contacts", "List"]}
+          styles={{ color: "orange.600" }}
+        >
           Seja Bem-vindo ao Contacts List
         </Highlight>
       </Heading>
