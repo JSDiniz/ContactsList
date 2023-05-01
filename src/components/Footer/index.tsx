@@ -8,7 +8,7 @@ const Footer = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Text fontSize={"xs"} color={"grey3"} textAlign={"center"}>
+      <Text fontSize={"xs"} color={"grey.400"} textAlign={"center"}>
         © 2023 CONTACTS LIST. TODOS OS DIREITOS RESERVADOS.
       </Text>
     </VStack>
