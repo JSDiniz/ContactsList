@@ -9,31 +9,47 @@ const theme = extendTheme({
   semanticTokens: {
     colors: {
       primary_bg: {
-        _light: "grey2",
-        _dark: "brand1",
+        _light: "grey.100",
+        _dark: "grey.600",
       },
       primary_text: {
-        _light: "grey1",
-        _dark: "whiteFixed",
+        _light: "grey.600",
+        _dark: "grey.100",
       },
 
       secondary_text: {
-        _light: "brand1",
-        _dark: "whiteFixed",
+        _light: "orange.600",
+        _dark: "grey.100",
       },
     },
   },
   colors: {
-    brand1: "#FF724c",
-    brand2: "#ff983f",
-    brand3: "#FDBF50",
+    yellow: {
+      400: "#FDBF50",
+    },
 
-    grey0: "#0A0A0B",
-    grey1: "#1D1F21",
-    grey2: "#2A2C41",
-    grey3: "#929292",
+    red: {
+      600: "#DF1545",
+    },
 
-    whiteFixed: "#F4F4F8",
+    green: {
+      600: "#168821",
+    },
+    orange: {
+      400: "#ff983f",
+      600: "#FF724c",
+    },
+
+    grey: {
+      50: "#FFFFFF",
+      100: "#F4F4F8",
+      200: "#E0E0E4",
+      300: "#D4D4D4",
+      400: "#929292",
+      500: "#2A2C41",
+      600: "#1D1F21",
+      700: "#0A0A0B",
+    },
   },
   components: {
     Button: cuttonTheme,
@@ -43,19 +59,16 @@ const theme = extendTheme({
           fontWeight: "700",
           fontSize: "44px",
           lineHeight: "56px",
-          color: "primary_text",
         },
         "Heading-2-600": {
           fontWeight: "600",
           fontSize: "36px",
           lineHeight: "45px",
-          color: "primary_text",
         },
         "Heading-3-600": {
           fontWeight: "600",
           fontSize: "32px",
           lineHeight: "40px",
-          color: "primary_text",
         },
         "Heading-3-500": {
           fontWeight: "500",
@@ -93,37 +106,64 @@ const theme = extendTheme({
       },
     },
   },
-  sizes: {
-    container: "75rem",
-    containerTablet: "40rem",
-  },
+
   fonts: {
-    titles: '"IBM Plex Sans", sans-serif;',
-    texts: '"Inter", sans-serif',
-  },
-  fontSizes: {
-    title1: "2.75rem",
-    title2: "1.75rem",
-    title3: "1.50rem",
-    title4: "1.25rem",
-    text1: "1rem",
-    text2: "0.875rem",
-  },
-  lineHeights: {
-    title1: "3.8rem",
-    title2: "2.75rem",
-    title3: "2.5rem",
-    title4: "1.25rem",
-    text1: "1.75rem",
-    text2: "1.75rem",
+    heading: '"IBM Plex Sans", sans-serif;',
+    body: '"Inter", sans-serif',
   },
 
+  fontSizes: {
+    xs: "0.75rem",
+    sm: "0.875rem",
+    md: "1rem",
+    lg: "1.125rem",
+    xl: "1.25rem",
+    "2xl": "1.5rem",
+    "3xl": "1.875rem",
+    "4xl": "2.25rem",
+    "5xl": "3rem",
+    "6xl": "3.75rem",
+    "7xl": "4.5rem",
+    "8xl": "6rem",
+    "9xl": "8rem",
+  },
+
+  fontWeights: {
+    hairline: 100,
+    thin: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    extrabold: 800,
+    black: 900,
+  },
+
+  lineHeights: {
+    normal: "normal",
+    none: 1,
+    shorter: 1.25,
+    short: 1.375,
+    base: 1.5,
+    tall: 1.625,
+    taller: "2",
+    "3": ".75rem",
+    "4": "1rem",
+    "5": "1.25rem",
+    "6": "1.5rem",
+    "7": "1.75rem",
+    "8": "2rem",
+    "9": "2.25rem",
+    "10": "2.5rem",
+  },
   styles: {
     global: {
       "html, body": {
-        fontFamily: "texts",
         minW: "100vw",
         minH: "100vh",
+        bg: "primary_bg",
+        color: "primary_text",
         overflowX: "hidden",
       },
       "#root": {
