@@ -1,10 +1,10 @@
-import { Stack } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 
 const Main = () => {
   return (
-    <Stack
+    <Flex
       as={"main"}
       minH="calc(100vh - 5rem - 3.125rem)"
       w={"full"}
@@ -20,7 +20,7 @@ const Main = () => {
     >
       <LeftSide />
       <RightSide />
-    </Stack>
+    </Flex>
   );
 };
 

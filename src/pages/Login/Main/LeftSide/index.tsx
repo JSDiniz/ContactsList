@@ -4,6 +4,7 @@ import foto from "../../../../assets/Password-cuate.png";
 const LeftSide = () => {
   return (
     <Box
+      as={"section"}
       display={["none", "none", "unset", "unset"]}
       boxSize={["sm", "sm", "md", "md"]}
       w={"50%"}

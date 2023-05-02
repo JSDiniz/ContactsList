@@ -1,7 +1,16 @@
 import { VStack, Stack, Heading, Link, Button } from "@chakra-ui/react";
-import Forms from "../../../../components/Forms/intex";
+import { Input } from "../../../../components/Form";
+import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const LeftSide = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   return (
     <VStack
       h={"full"}
@@ -19,41 +28,54 @@ const LeftSide = () => {
         gap={3}
         alignItems={"center"}
       >
-        <Forms
-          label={"Nome"}
+        <Input
           type={"text"}
-          placeholder={"Digite aqui seu nome"}
+          label={"Login"}
+          icon={FaUser}
+          {...register("name")}
+          placeholder={"Digite seu nome"}
         />
 
-        <Forms
-          label={"Email"}
+        <Input
           type={"email"}
-          placeholder={"Digite seu Email"}
+          label={"Login"}
+          icon={FaEnvelope}
+          {...register("email")}
+          placeholder={"Digite seu login"}
         />
 
-        <Forms
-          label={"Password"}
+        <Input
+          icon={FaLock}
+          label={"Senha"}
           type={"password"}
-          placeholder={"Digite aqui sua senha"}
+          {...register("password")}
+          placeholder={"Digite sua senha"}
         />
 
-        <Forms
-          label={"Confirmar Senha"}
+        <Input
+          icon={FaLock}
+          label={"Senha"}
           type={"password"}
-          placeholder={"Digite novamente sua senha"}
+          {...register("password")}
+          placeholder={"Confirme suas senha"}
         />
 
-        <Forms
+        <Input
+          icon={FaMobile}
           label={"Telefone"}
           type={"tel"}
-          placeholder={"Digite aqui seu Telefone"}
+          {...register("tel")}
+          placeholder={"Confirme suas telefone"}
         />
 
-        <Forms
+        <Input
+          icon={FaCamera}
           label={"Adicione foto"}
           type={"url"}
-          placeholder={"Adicione sua foto aqui"}
+          {...register("tel")}
+          placeholder={"Adicione sua foto"}
         />
+
         <Button variant={"toEnter"}>Cadastrar</Button>
       </Stack>
     </VStack>
