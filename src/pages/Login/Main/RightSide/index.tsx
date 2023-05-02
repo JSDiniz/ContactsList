@@ -1,52 +1,99 @@
-import { VStack, Stack, Heading, Button, Text } from "@chakra-ui/react";
-import Forms from "../../../../components/Forms/intex";
+import { Box, VStack, Stack, Heading, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+import { Ilogin } from "../../../../interface/Login";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../../../schemas/Login";
+import { Input } from "../../../../components/Form";
 
 const RightSide = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Ilogin>({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const handleLogin = (body: Ilogin) => console.log(body);
+
   return (
-    <VStack
+    <Box
+      as={"section"}
       h={"full"}
       maxW={"480px"}
       w={["full", "full", "50%", "50%"]}
-      style={{ margin: "0" }}
-      gap={8}
     >
-      <Heading as={"h1"}>Login</Heading>
+      <Heading as={"h1"} textAlign={"center"}>
+        Login
+      </Heading>
 
-      <Stack
+      <VStack
         as={"form"}
         w={"full"}
-        style={{ margin: "0" }}
-        gap={5}
-        alignItems={"center"}
+        mt={8}
+        spacing={5}
+        onSubmit={handleSubmit(handleLogin)}
       >
-        <Forms
-          label={"Email"}
-          type={"email"}
-          placeholder={"Digite seu Email"}
-        />
+        <Box w={"full"}>
+          <Input
+            type={"email"}
+            label={"Login"}
+            icon={FaEnvelope}
+            error={errors.email}
+            {...register("email")}
+            placeholder={"Digite seu login"}
+          />
+          {!errors.email && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: nome@mail.com
+            </Text>
+          )}
+        </Box>
 
-        <Forms
-          label={"Password"}
-          type={"password"}
-          placeholder={"Digite seu Senha"}
-        />
-        <Button variant={"toEnter"}>Entrar</Button>
+        <Box w={"full"}>
+          <Input
+            icon={FaLock}
+            label={"Senha"}
+            type={"password"}
+            error={errors.password}
+            {...register("password")}
+            placeholder={"Digite sua senha"}
+          />
+          {!errors.password && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: Sahaj@a5841
+            </Text>
+          )}
+        </Box>
 
-        <Link to={"/register"}>
-          <Text
-            fontSize={"14px"}
-            fontWeight={"normal"}
-            borderBottom={"1px"}
-            borderColor={"transparent"}
-            _hover={{ borderBottom: "1px", borderColor: "whiteFixed" }}
-          >
-            Ainda não possui uma conta?
-          </Text>
-        </Link>
-        <Button variant={"register"}>Cadastre-se</Button>
-      </Stack>
-    </VStack>
+        <VStack w={"full"} mt={"4"} spacing={"5"}>
+          <Button variant={"toEnter"} type={"submit"}>
+            Entrar
+          </Button>
+
+          <Link to={"/register"}>
+            <Text
+              fontSize={"14px"}
+              color={"gray.600"}
+              fontWeight={"normal"}
+              borderBottom={"1px"}
+              borderColor={"transparent"}
+              _hover={{
+                color: "gray.100",
+                borderBottom: "1px",
+                borderColor: "gray.100",
+              }}
+            >
+              Ainda não possui uma conta?
+            </Text>
+          </Link>
+
+          <Button variant={"register"}>Cadastre-se</Button>
+        </VStack>
+      </VStack>
+    </Box>
   );
 };
 
