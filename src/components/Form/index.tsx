@@ -34,8 +34,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
   const [variants, setVariants] = useState("default");
   const [value, setValue] = useState("");
 
-  console.log(error);
-
   useEffect(() => {
     if (error) {
       return setVariants("error");
