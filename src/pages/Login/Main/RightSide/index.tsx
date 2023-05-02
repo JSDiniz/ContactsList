@@ -1,13 +1,18 @@
-import { Box, VStack, Stack, Heading, Button, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Input } from "../../../../components/Form";
+import { UseAuth } from "../../../../contexts/Auth";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Ilogin } from "../../../../interface/Login";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../../../schemas/Login";
-import { Input } from "../../../../components/Form";
+import { Box, VStack, Heading, Button, Text } from "@chakra-ui/react";
 
 const RightSide = () => {
+  const [loading, setLoading] = useState(false);
+  const { login } = UseAuth();
+
   const {
     register,
     handleSubmit,
@@ -16,7 +21,13 @@ const RightSide = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = (body: Ilogin) => console.log(body);
+  const handleLogin = (body: Ilogin) => {
+    setLoading(true);
+
+    login(body)
+      .then((_) => setLoading(false))
+      .catch((err) => setLoading(false));
+  };
 
   return (
     <Box
