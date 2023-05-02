@@ -1,15 +1,11 @@
-import Section from "../../styles/ContainerTheme";
+import { VStack } from "@chakra-ui/react";
 import Header from "../../components/Header";
-import Main from "./Main/intex";
-import Footer from "../../components/Footer";
 
 const Dashboard = () => {
   return (
-    <Section>
+    <VStack>
       <Header />
-      <Main />
-      <Footer />
-    </Section>
+    </VStack>
   );
 };
 
