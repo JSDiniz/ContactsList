@@ -1,6 +1,7 @@
+import { RouteProps } from "react-router-dom";
+import { ComponentType } from "react";
 import { ReactNode } from "react";
 import { Ilogin } from "../Login";
-import { IUser } from "../User";
 
 export interface IAuthProvider {
   children: ReactNode;
@@ -9,7 +10,10 @@ export interface IAuthProvider {
 export interface IAuthContext {
   token: string;
   login: (body: Ilogin) => Promise<void>;
-  // user: IUser;
+  logout: () => void;
 }
 
-// use, setUse
+export interface IRouteProps extends RouteProps {
+  isPrivate?: boolean;
+  component: ComponentType;
+}
