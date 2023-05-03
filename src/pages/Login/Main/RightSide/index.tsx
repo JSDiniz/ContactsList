@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Input } from "../../../../components/Form";
-import { UseAuth } from "../../../../contexts/Auth";
+import { useAuth } from "../../../../contexts/Auth";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Ilogin } from "../../../../interface/Login";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,7 +11,7 @@ import { Box, VStack, Heading, Button, Text } from "@chakra-ui/react";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = UseAuth();
+  const { login } = useAuth();
 
   const {
     register,

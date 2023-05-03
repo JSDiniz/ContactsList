@@ -6,7 +6,7 @@ import { IAuthUser } from "../../interface/User";
 import { Ilogin } from "../../interface/Login";
 
 const AuthContex = createContext<IAuthContext>({} as IAuthContext);
-const UseAuth = () => {
+const useAuth = () => {
   const context = useContext(AuthContex);
 
   if (!context) {
@@ -33,14 +33,20 @@ const AuthProvider = ({ children }: IAuthProvider) => {
     const { token } = res.data;
 
     localStorage.setItem("@ContactsList:token", token);
-    setUse(res.data.token);
+    setUse({ token });
+  }, []);
+
+  const logout = useCallback(() => {
+    localStorage.removeItem("@ContactsList:token");
+
+    setUse({} as IAuthUser);
   }, []);
 
   return (
-    <AuthContex.Provider value={{ login, token: use.token }}>
+    <AuthContex.Provider value={{ login, token: use.token, logout }}>
       {children}
     </AuthContex.Provider>
   );
 };
 
-export { UseAuth, AuthProvider };
+export { useAuth, AuthProvider };
