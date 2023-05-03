@@ -1,6 +1,9 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Button, Stack, Text } from "@chakra-ui/react";
+import { useAuth } from "../../../contexts/Auth";
 
 const Main = () => {
+  const { logout } = useAuth();
+
   return (
     <Stack
       as={"main"}
@@ -15,6 +18,7 @@ const Main = () => {
       flexDir={["column", "column", "row", "row"]}
     >
       <Text>Dashboard</Text>
+      <Button onClick={logout}>Sair</Button>
     </Stack>
   );
 };
