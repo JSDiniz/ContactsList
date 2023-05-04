@@ -1,5 +1,14 @@
 import { IContactsRes } from "../Contacts";
 
+export interface IUserReq {
+  name: string;
+  email: string;
+  password: string;
+  telephone: string;
+  imageUrl?: string;
+  confirmPassword: string;
+}
+
 export interface IUser {
   id: string;
   name: string;
@@ -7,7 +16,6 @@ export interface IUser {
   password: string;
   telephone: string;
   imageUrl: string;
-  isAdmin: boolean;
 }
 
 export interface IAuthUser {
