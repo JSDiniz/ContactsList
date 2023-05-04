@@ -11,7 +11,7 @@ import {
   Text,
   Avatar,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
+import { FaEnvelope, FaMobile } from "react-icons/fa";
 import { useAuth } from "../../contexts/Auth";
 
 const Cards = () => {
