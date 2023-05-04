@@ -3,13 +3,36 @@ import { Input } from "../../../../components/Form";
 import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { IUserReq } from "../../../../interface/User";
+import { userSchemasReq } from "../../../../schemas/Register";
+import { useState } from "react";
+import { Api } from "../../../../services";
 
 const LeftSide = () => {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IUserReq>({
+    resolver: yupResolver(userSchemasReq),
+  });
+
+  const handleSignUp = (body: IUserReq) => {
+    Reflect.deleteProperty(body, "confirmPassword");
+
+    setLoading(true);
+
+    Api.post("/users", body)
+      .then((res) => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
 
   return (
     <VStack
@@ -27,11 +50,13 @@ const LeftSide = () => {
         style={{ margin: "0" }}
         gap={3}
         alignItems={"center"}
+        onSubmit={handleSubmit(handleSignUp)}
       >
         <Input
           type={"text"}
-          label={"Login"}
           icon={FaUser}
+          label={"Login"}
+          error={errors.name}
           {...register("name")}
           placeholder={"Digite seu nome"}
         />
@@ -40,6 +65,7 @@ const LeftSide = () => {
           type={"email"}
           label={"Login"}
           icon={FaEnvelope}
+          error={errors.email}
           {...register("email")}
           placeholder={"Digite seu login"}
         />
@@ -48,6 +74,7 @@ const LeftSide = () => {
           icon={FaLock}
           label={"Senha"}
           type={"password"}
+          error={errors.password}
           {...register("password")}
           placeholder={"Digite sua senha"}
         />
@@ -56,7 +83,8 @@ const LeftSide = () => {
           icon={FaLock}
           label={"Senha"}
           type={"password"}
-          {...register("password")}
+          error={errors.confirmPassword}
+          {...register("confirmPassword")}
           placeholder={"Confirme suas senha"}
         />
 
@@ -64,7 +92,8 @@ const LeftSide = () => {
           icon={FaMobile}
           label={"Telefone"}
           type={"tel"}
-          {...register("tel")}
+          error={errors.telephone}
+          {...register("telephone")}
           placeholder={"Confirme suas telefone"}
         />
 
@@ -72,11 +101,14 @@ const LeftSide = () => {
           icon={FaCamera}
           label={"Adicione foto"}
           type={"url"}
-          {...register("tel")}
+          error={errors.imageUrl}
+          {...register("imageUrl")}
           placeholder={"Adicione sua foto"}
         />
 
-        <Button variant={"toEnter"}>Cadastrar</Button>
+        <Button variant={"toEnter"} type={"submit"}>
+          Cadastrar
+        </Button>
       </Stack>
     </VStack>
   );
