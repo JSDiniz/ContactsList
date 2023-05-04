@@ -1,3 +1,5 @@
+import { IContactsRes } from "../Contacts";
+
 export interface IUser {
   id: string;
   name: string;
@@ -10,5 +12,9 @@ export interface IUser {
 
 export interface IAuthUser {
   token: string;
-  user?: IUser;
+  user: IUserContacts;
+}
+
+export interface IUserContacts extends IUser {
+  contacts: Array<IContactsRes>;
 }
