@@ -66,8 +66,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
         <ChakraInput
           id={name}
           h={"44px"}
-          size={"lg"}
           name={name}
+          size={"lg"}
           fontSize={"sm"}
           border={"1px"}
           onFocus={handleInputFocus}
