@@ -11,7 +11,7 @@ import { Box, VStack, Heading, Button, Text } from "@chakra-ui/react";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { signIn } = useAuth();
 
   const {
     register,
@@ -21,10 +21,10 @@ const RightSide = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = (body: Ilogin) => {
+  const handleSignIn = (body: Ilogin) => {
     setLoading(true);
 
-    login(body)
+    signIn(body)
       .then((_) => setLoading(false))
       .catch((err) => setLoading(false));
   };
@@ -45,7 +45,7 @@ const RightSide = () => {
         w={"full"}
         mt={8}
         spacing={5}
-        onSubmit={handleSubmit(handleLogin)}
+        onSubmit={handleSubmit(handleSignIn)}
       >
         <Box w={"full"}>
           <Input

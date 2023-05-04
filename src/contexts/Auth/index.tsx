@@ -17,33 +17,39 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }: IAuthProvider) => {
-  const [use, setUse] = useState<IAuthUser>(() => {
+  const [data, setdata] = useState<IAuthUser>(() => {
     const token = localStorage.getItem("@ContactsList:token");
+    const user = localStorage.getItem("@ContactsList:user");
 
-    if (token) {
-      return { token };
+    if (token && user) {
+      return { token, user: JSON.parse(user) };
     }
 
     return {} as IAuthUser;
   });
 
-  const login = useCallback(async (body: Ilogin) => {
+  const signIn = useCallback(async (body: Ilogin) => {
     const res = await Api.post("/login", body);
 
-    const { token } = res.data;
+    const { token, user } = res.data;
 
     localStorage.setItem("@ContactsList:token", token);
-    setUse({ token });
+    localStorage.setItem("@ContactsList:user", JSON.stringify(user));
+
+    setdata({ token, user });
   }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem("@ContactsList:token");
+    localStorage.removeItem("@ContactsList:user");
 
-    setUse({} as IAuthUser);
+    setdata({} as IAuthUser);
   }, []);
 
   return (
-    <AuthContex.Provider value={{ login, token: use.token, logout }}>
+    <AuthContex.Provider
+      value={{ signIn, token: data.token, user: data.user, logout }}
+    >
       {children}
     </AuthContex.Provider>
   );
