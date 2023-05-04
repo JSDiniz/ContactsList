@@ -1,14 +1,18 @@
-import { Button, Flex, Heading, Icon } from "@chakra-ui/react";
-import { SmallAddIcon } from "@chakra-ui/icons";
+import { Button, Flex, HStack, Heading, Icon } from "@chakra-ui/react";
+import Search from "../../../../components/Search";
 
 const LeftSide = () => {
   return (
-    <Flex h={"80px"} justify={"space-between"}>
-      <Heading as={"h1"} fontSize={"2xl"}>
-        Contacts
-      </Heading>
-      <Button>
-        <Icon as={SmallAddIcon} />
+    <Flex
+      w={"full"}
+      alignItems={"center"}
+      gap={4}
+      flexDir={["column", "column", "row", "row"]}
+      justifyContent={"flex-end"}
+    >
+      <Search />
+      <Button fontSize={"sm"} w={["full", "auto", "auto", "auto"]}>
+        Adicionar Contacts
       </Button>
     </Flex>
   );
