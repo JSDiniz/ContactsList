@@ -7,4 +7,5 @@ export interface IInputProps extends ChakraInputProps {
   label?: string;
   error?: FieldError | null;
   icon?: IconType;
+  defaultValue?: string;
 }
