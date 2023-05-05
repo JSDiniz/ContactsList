@@ -28,7 +28,7 @@ const inputVariants: inputVariantsOptions = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  { name, label, error = null, icon: Icon, ...rest },
+  { name, label, error = null, icon: Icon, defaultValue, ...rest },
   ref
 ) => {
   const [variants, setVariants] = useState("default");
@@ -67,6 +67,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           id={name}
           h={"44px"}
           name={name}
+          defaultValue={defaultValue}
           size={"lg"}
           fontSize={"sm"}
           border={"1px"}

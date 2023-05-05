@@ -1,11 +1,12 @@
 import { createContext, useContext, useCallback, useState } from "react";
 
 import { Api } from "../../services";
-import { IAuthContext, IAuthProvider } from "../../interface/Auth";
-import { IAuthUser } from "../../interface/User";
+import { IAuthContext, IAuthProvider } from "../../interface/contexts";
+import { IAuthUser, IUpdate } from "../../interface/User";
 import { Ilogin } from "../../interface/Login";
 
 const AuthContex = createContext<IAuthContext>({} as IAuthContext);
+
 const useAuth = () => {
   const context = useContext(AuthContex);
 
@@ -46,9 +47,43 @@ const AuthProvider = ({ children }: IAuthProvider) => {
     setdata({} as IAuthUser);
   }, []);
 
+  const deleteUser = useCallback(async (userId: string, token: string) => {
+    await Api.delete(`/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((_) => {
+        logout();
+      })
+      .catch((err) => console.log(err.data));
+  }, []);
+
+  const updateUser = useCallback(
+    async (userId: string, body: IUpdate, token: string) => {
+      await Api.patch(`/users/${userId}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
   return (
     <AuthContex.Provider
-      value={{ signIn, token: data.token, user: data.user, logout }}
+      value={{
+        signIn,
+        token: data.token,
+        user: data.user,
+        logout,
+        deleteUser,
+        updateUser,
+      }}
     >
       {children}
     </AuthContex.Provider>

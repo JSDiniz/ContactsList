@@ -5,88 +5,96 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
-import { useAuth } from "../../contexts/Auth";
-import { Input } from "../Form";
+import { FaEnvelope, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { IUpdate, IUserReq } from "../../interface/User";
+import { Input } from "../Form";
+import { ICreateContactsUser, ICreateContacts } from "../../interface/Contacts";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { updateUserSchemasReq } from "../../schemas/Register";
+import contactsSchemas from "../../schemas/Contacts";
+import { useAuth } from "../../contexts/Auth";
+import { useContacts } from "../../contexts/Contact";
 
-interface IProfile {
+interface ICreateContactsProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const Profile = ({ isOpen, onClose }: IProfile) => {
-  const { token, user, deleteUser, updateUser } = useAuth();
+const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
+  const { user, token } = useAuth();
+  const { createContacts } = useContacts();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUpdate>({
-    resolver: yupResolver(updateUserSchemasReq),
+  } = useForm<ICreateContacts>({
+    resolver: yupResolver(contactsSchemas),
   });
 
-  const handleUpdateUser = (body: IUpdate) => {
-    updateUser(user.id, body, token);
+  const handleCreateContacts = (data: ICreateContacts) => {
+    const { telephone, email } = data;
+    const phones = [];
+    const emails = [];
+
+    phones.push({ telephone: telephone });
+    emails.push({ email: email });
+
+    Reflect.deleteProperty(data, "telephone");
+    Reflect.deleteProperty(data, "email");
+
+    const newData: ICreateContactsUser = {
+      ...data,
+      phones,
+      emails,
+      userId: user.id,
+    };
+
+    createContacts(newData, token);
     onClose();
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent as={"form"} onSubmit={handleSubmit(handleUpdateUser)}>
-        <ModalHeader>Perfil</ModalHeader>
-
+      <ModalContent as={"form"} onSubmit={handleSubmit(handleCreateContacts)}>
+        <ModalHeader>Contato</ModalHeader>
         <ModalBody>
           <Input
             type={"text"}
+            label={"Name"}
             icon={FaUser}
-            label={"Login"}
-            defaultValue={user.name}
             error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
-            mb={4}
           />
 
           <Input
             type={"email"}
             label={"Email"}
-            defaultValue={user.email}
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
-            placeholder={"Digite seu login"}
-            mb={4}
+            placeholder={"Digite o email"}
           />
 
           <Input
             icon={FaMobile}
             label={"Telefone"}
             type={"tel"}
-            defaultValue={user.telephone}
             error={errors.telephone}
             {...register("telephone")}
             placeholder={"Confirme suas telefone"}
-            mb={4}
           />
 
           <Input
             icon={FaCamera}
             label={"Adicione foto"}
             type={"url"}
-            defaultValue={user.imageUrl}
             error={errors.imageUrl}
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
-            mb={4}
           />
         </ModalBody>
 
@@ -94,10 +102,7 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Cancelar
           </Button>
-          <Button onClick={() => deleteUser(user.id, token)} mr={3}>
-            Excluir
-          </Button>
-          <Button type="submit" variant="ghost">
+          <Button type={"submit"} variant="ghost">
             Salvar
           </Button>
         </ModalFooter>
@@ -106,4 +111,4 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
   );
 };
 
-export default Profile;
+export default CreateContacts;
