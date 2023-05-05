@@ -26,3 +26,10 @@ export interface IAuthUser {
 export interface IUserContacts extends IUser {
   contacts: Array<IContactsRes>;
 }
+
+export interface IUpdate {
+  name: string;
+  email: string;
+  telephone: string;
+  imageUrl?: string;
+}
