@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaExclamation } from "react-icons/fa";
 
-interface ModalErrorProps {
+interface IModalErrorProps {
   isOpen: boolean;
   onClose: () => void;
   error: string;
@@ -25,7 +25,7 @@ const ModalError = ({
   onClose,
   error,
   secondaryTex,
-}: ModalErrorProps) => {
+}: IModalErrorProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
