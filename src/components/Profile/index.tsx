@@ -13,69 +13,80 @@ import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useAuth } from "../../contexts/Auth";
 import { Input } from "../Form";
 import { useForm } from "react-hook-form";
+import { IUpdate, IUserReq } from "../../interface/User";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { updateUserSchemasReq } from "../../schemas/Register";
 
-const Profile = ({ isOpen, onClose }: any) => {
-  const { user } = useAuth();
+interface IProfile {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Profile = ({ isOpen, onClose }: IProfile) => {
+  const { token, user, deleteUser, updateUser } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IUpdate>({
+    resolver: yupResolver(updateUserSchemasReq),
+  });
+
+  const handleUpdateUser = (body: IUpdate) => {
+    updateUser(user.id, body, token);
+    onClose();
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent as={"form"}>
+      <ModalContent as={"form"} onSubmit={handleSubmit(handleUpdateUser)}>
         <ModalHeader>Perfil</ModalHeader>
 
         <ModalBody>
           <Input
             type={"text"}
-            label={"Name"}
             icon={FaUser}
+            label={"Login"}
+            defaultValue={user.name}
+            error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
+            mb={4}
           />
 
           <Input
             type={"email"}
-            label={"Login"}
+            label={"Email"}
+            defaultValue={user.email}
             icon={FaEnvelope}
+            error={errors.email}
             {...register("email")}
             placeholder={"Digite seu login"}
-          />
-
-          <Input
-            icon={FaLock}
-            label={"Senha"}
-            type={"password"}
-            {...register("password")}
-            placeholder={"Digite sua senha"}
-          />
-
-          <Input
-            icon={FaLock}
-            label={"Senha"}
-            type={"password"}
-            {...register("password")}
-            placeholder={"Confirme suas senha"}
+            mb={4}
           />
 
           <Input
             icon={FaMobile}
             label={"Telefone"}
             type={"tel"}
-            {...register("tel")}
+            defaultValue={user.telephone}
+            error={errors.telephone}
+            {...register("telephone")}
             placeholder={"Confirme suas telefone"}
+            mb={4}
           />
 
           <Input
             icon={FaCamera}
             label={"Adicione foto"}
             type={"url"}
-            {...register("tel")}
+            defaultValue={user.imageUrl}
+            error={errors.imageUrl}
+            {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
+            mb={4}
           />
         </ModalBody>
 
@@ -83,7 +94,12 @@ const Profile = ({ isOpen, onClose }: any) => {
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Cancelar
           </Button>
-          <Button variant="ghost">Salvar</Button>
+          <Button onClick={() => deleteUser(user.id, token)} mr={3}>
+            Excluir
+          </Button>
+          <Button type="submit" variant="ghost">
+            Salvar
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
