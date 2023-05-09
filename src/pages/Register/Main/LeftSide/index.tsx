@@ -4,6 +4,7 @@ import {
   Heading,
   Button,
   useDisclosure,
+  Text,
 } from "@chakra-ui/react";
 import { Input } from "../../../../components/Form";
 import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
@@ -91,20 +92,30 @@ const LeftSide = () => {
           <Input
             type={"text"}
             icon={FaUser}
-            label={"Login"}
+            label={"Name"}
             error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
           />
+          {!errors.name && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: nome
+            </Text>
+          )}
 
           <Input
             type={"email"}
-            label={"email"}
+            label={"Email"}
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
             placeholder={"Digite seu email"}
           />
+          {!errors.email && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: nome@mail.com
+            </Text>
+          )}
 
           <Input
             icon={FaLock}
@@ -114,6 +125,11 @@ const LeftSide = () => {
             {...register("password")}
             placeholder={"Digite sua senha"}
           />
+          {!errors.password && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: Sahaj@a5841
+            </Text>
+          )}
 
           <Input
             icon={FaLock}
@@ -123,6 +139,11 @@ const LeftSide = () => {
             {...register("confirmPassword")}
             placeholder={"Confirme suas senha"}
           />
+          {!errors.confirmPassword && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: Sahaj@a5841
+            </Text>
+          )}
 
           <Input
             icon={FaMobile}
@@ -132,6 +153,11 @@ const LeftSide = () => {
             {...register("telephone")}
             placeholder={"Digite seu telefone"}
           />
+          {!errors.confirmPassword && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: 99999999999
+            </Text>
+          )}
 
           <Input
             icon={FaCamera}
@@ -141,6 +167,11 @@ const LeftSide = () => {
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
           />
+          {!errors.confirmPassword && (
+            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+              Ex: data:image/jpeg;base86,
+            </Text>
+          )}
 
           <Button variant={"toEnter"} type={"submit"}>
             Cadastrar
