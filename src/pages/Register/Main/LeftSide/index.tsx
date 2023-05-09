@@ -99,7 +99,7 @@ const LeftSide = () => {
 
           <Input
             type={"email"}
-            label={"Login"}
+            label={"email"}
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
