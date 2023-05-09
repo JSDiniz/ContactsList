@@ -1,9 +1,9 @@
 import { createContext, useContext, useCallback, useState } from "react";
-
 import { Api } from "../../services";
 import { IAuthContext, IAuthProvider } from "../../interface/contexts";
 import { IAuthUser, IUpdate } from "../../interface/User";
 import { Ilogin } from "../../interface/Login";
+import { IContactsUser } from "../../interface/Contacts";
 
 const AuthContex = createContext<IAuthContext>({} as IAuthContext);
 
@@ -28,6 +28,7 @@ const AuthProvider = ({ children }: IAuthProvider) => {
 
     return {} as IAuthUser;
   });
+  const [contacts, setContacts] = useState<IContactsUser[]>([]);
 
   const signIn = useCallback(async (body: Ilogin) => {
     const res = await Api.post("/login", body);
@@ -38,6 +39,7 @@ const AuthProvider = ({ children }: IAuthProvider) => {
     localStorage.setItem("@ContactsList:user", JSON.stringify(user));
 
     setdata({ token, user });
+    setContacts(user.contacts);
   }, []);
 
   const logout = useCallback(() => {
@@ -83,6 +85,8 @@ const AuthProvider = ({ children }: IAuthProvider) => {
         logout,
         deleteUser,
         updateUser,
+        contacts,
+        setContacts,
       }}
     >
       {children}

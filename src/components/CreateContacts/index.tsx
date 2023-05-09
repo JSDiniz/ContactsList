@@ -68,6 +68,7 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
+            mb={4}
           />
 
           <Input
@@ -76,7 +77,8 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
-            placeholder={"Digite o email"}
+            placeholder={"Digite seu email"}
+            mb={4}
           />
 
           <Input
@@ -85,7 +87,8 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             type={"tel"}
             error={errors.telephone}
             {...register("telephone")}
-            placeholder={"Confirme suas telefone"}
+            placeholder={"Digite seu telefone"}
+            mb={4}
           />
 
           <Input
@@ -95,6 +98,7 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.imageUrl}
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
+            mb={4}
           />
         </ModalBody>
 

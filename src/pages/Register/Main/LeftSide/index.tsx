@@ -2,7 +2,6 @@ import {
   VStack,
   Stack,
   Heading,
-  Link,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -16,9 +15,11 @@ import { useState } from "react";
 import { Api } from "../../../../services";
 import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 import ModalError from "../../../../components/Modal/ModalError";
+import { useHistory } from "react-router-dom";
 
 const LeftSide = () => {
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const {
     isOpen: isModalSuccess,
     onOpen: onModalSuccess,
@@ -57,7 +58,12 @@ const LeftSide = () => {
 
   return (
     <>
-      <ModalSuccess isOpen={isModalSuccess} onClose={onModalSuccessClose} />
+      <ModalSuccess
+        isOpen={isModalSuccess}
+        onClose={onModalSuccessClose}
+        onClick={() => history.push("/login")}
+        buttonText={"Ir para o login agora"}
+      />
       <ModalError
         isOpen={isModalError}
         onClose={onModalErrorClose}
@@ -97,7 +103,7 @@ const LeftSide = () => {
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
-            placeholder={"Digite seu login"}
+            placeholder={"Digite seu email"}
           />
 
           <Input
@@ -124,7 +130,7 @@ const LeftSide = () => {
             type={"tel"}
             error={errors.telephone}
             {...register("telephone")}
-            placeholder={"Confirme suas telefone"}
+            placeholder={"Digite seu telefone"}
           />
 
           <Input
