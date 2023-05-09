@@ -5,21 +5,13 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
+import { FaEnvelope, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useAuth } from "../../contexts/Auth";
 import { Input } from "../Form";
 import { useForm } from "react-hook-form";
-import {
-  IContactsRes,
-  ICreateContacts,
-  ICreateContactsUser,
-} from "../../interface/Contacts";
-import { yupResolver } from "@hookform/resolvers/yup";
-import contactsSchemas from "../../schemas/Contacts";
+import { IContactsRes, ICreateContactsUser } from "../../interface/Contacts";
 import { useContacts } from "../../contexts/Contact";
 
 interface IEditContact {
@@ -36,16 +28,16 @@ const EditContact = ({ isOpen, onClose, contact }: IEditContact) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreateContacts>({
-    resolver: yupResolver(contactsSchemas),
-  });
+  } = useForm();
 
   const editContact = (data: any) => {
     const { telephone, email } = data;
     const phones = [];
     const emails = [];
 
-    phones.push({ telephone: telephone });
+    const phoneId = Object.keys(telephone)[0];
+
+    phones.push({ id: phoneId, telephone: telephone[phoneId] });
     emails.push({ email: email });
 
     Reflect.deleteProperty(data, "telephone");
@@ -77,7 +69,6 @@ const EditContact = ({ isOpen, onClose, contact }: IEditContact) => {
             {...register("name")}
             placeholder={"Digite seu nome"}
           />
-
           <Input
             type={"email"}
             defaultValue={contact.emails[0].email}
@@ -86,13 +77,13 @@ const EditContact = ({ isOpen, onClose, contact }: IEditContact) => {
             {...register("email")}
             placeholder={"Digite seu login"}
           />
-
           <Input
+            key={contact.phones[0].id}
             icon={FaMobile}
             defaultValue={contact.phones[0].telephone}
             label={"Telefone"}
             type={"tel"}
-            {...register("telephone")}
+            {...register(`telephone.${contact.phones[0].id}`)}
             placeholder={"Confirme suas telefone"}
           />
 

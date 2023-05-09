@@ -2,7 +2,6 @@ import {
   VStack,
   Stack,
   Heading,
-  Link,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -42,8 +41,6 @@ const LeftSide = () => {
 
   const handleSignUp = (body: IUserReq) => {
     Reflect.deleteProperty(body, "confirmPassword");
-
-    console.log(body);
 
     setLoading(true);
 
@@ -106,7 +103,7 @@ const LeftSide = () => {
             icon={FaEnvelope}
             error={errors.email}
             {...register("email")}
-            placeholder={"Digite seu login"}
+            placeholder={"Digite seu email"}
           />
 
           <Input
@@ -133,7 +130,7 @@ const LeftSide = () => {
             type={"tel"}
             error={errors.telephone}
             {...register("telephone")}
-            placeholder={"Confirme suas telefone"}
+            placeholder={"Digite seu telefone"}
           />
 
           <Input

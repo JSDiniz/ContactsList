@@ -6,7 +6,10 @@ const RightSide = () => {
   const { contacts } = useAuth();
 
   return (
-    <Wrap justify={"space-between"} pt={"7"}>
+    <Wrap
+      justify={["center", "space-between", "space-between", "space-between"]}
+      pt={"7"}
+    >
       {contacts.map((contact) => (
         <WrapItem key={contact.id}>
           <Cards contact={contact} />

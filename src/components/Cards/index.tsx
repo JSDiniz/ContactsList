@@ -52,11 +52,11 @@ const Cards = ({ contact }: IContactProps) => {
             </Heading>
             <HStack>
               <Icon as={FaMobile} />
-              <Text fontSize={"xm"}>{contact.phones[0].telephone}</Text>
+              <Text fontSize={"sm"}>{contact.phones[0].telephone}</Text>
             </HStack>
             <HStack>
               <Icon as={FaEnvelope} />
-              <Text fontSize={"xm"}>{contact.emails[0].email}</Text>
+              <Text fontSize={"sm"}>{contact.emails[0].email}</Text>
             </HStack>
           </Stack>
         </CardBody>
