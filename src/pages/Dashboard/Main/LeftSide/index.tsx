@@ -1,11 +1,4 @@
-import {
-  Button,
-  Flex,
-  HStack,
-  Heading,
-  Icon,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import Search from "../../../../components/Search";
 import CreateContacts from "../../../../components/CreateContacts";
 

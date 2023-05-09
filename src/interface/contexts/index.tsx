@@ -17,6 +17,9 @@ export interface IAuthContext {
 
   deleteUser: (userId: string, token: string) => Promise<void>;
   updateUser: (userId: string, body: IUpdate, token: string) => Promise<void>;
+
+  contacts: IContactsUser[];
+  setContacts: React.Dispatch<React.SetStateAction<IContactsUser[]>>;
 }
 
 export interface IRouteProps extends RouteProps {

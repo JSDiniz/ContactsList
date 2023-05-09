@@ -1,8 +1,9 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext } from "react";
 import { IContactsContext, IAuthProvider } from "../../interface/contexts";
 import { Api } from "../../services";
 import { ICreateContactsUser, IContactsUser } from "../../interface/Contacts";
 import { AxiosResponse } from "axios";
+import { useAuth } from "../Auth";
 
 const ContactsContext = createContext<IContactsContext>({} as IContactsContext);
 
@@ -17,7 +18,7 @@ const useContacts = () => {
 };
 
 const ContactProvider = ({ children }: IAuthProvider) => {
-  const [contacts, setContacts] = useState<IContactsUser[]>([]);
+  const { contacts, setContacts } = useAuth();
 
   const loadContacts = useCallback(async (userId: string, token: string) => {
     try {
@@ -26,7 +27,7 @@ const ContactProvider = ({ children }: IAuthProvider) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const { data } = res.data;
+      const { data } = res;
 
       setContacts(data);
     } catch (err) {
