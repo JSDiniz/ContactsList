@@ -13,13 +13,18 @@ import {
 interface ModalSuccessProps {
   isOpen: boolean;
   onClose: () => void;
+  onClick: () => void;
+  buttonText: string;
   //   message: string;
-  //   buttonText: string;
-  //   onClick: () => void;
   //   secundaryText: string;
 }
 
-const ModalSuccess = ({ isOpen, onClose }: ModalSuccessProps) => {
+const ModalSuccess = ({
+  isOpen,
+  onClose,
+  onClick,
+  buttonText,
+}: ModalSuccessProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -31,10 +36,10 @@ const ModalSuccess = ({ isOpen, onClose }: ModalSuccessProps) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
+          <Button colorScheme="blue" mr={3} onClick={onClick}>
+            {buttonText}
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
+          {/* <Button variant="ghost">Secondary Action</Button> */}
         </ModalFooter>
       </ModalContent>
     </Modal>
