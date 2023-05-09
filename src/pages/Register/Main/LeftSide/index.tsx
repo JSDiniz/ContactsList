@@ -76,17 +76,15 @@ const LeftSide = () => {
         h={"full"}
         maxW={"480px"}
         w={["full", "full", "50%", "50%"]}
-        style={{ margin: "0" }}
         gap={8}
+        style={{ marginTop: "1.875rem" }}
       >
         <Heading as={"h1"}>Crie sua conta</Heading>
 
         <Stack
           as={"form"}
           w={"full"}
-          style={{ margin: "0" }}
-          gap={3}
-          alignItems={"center"}
+          style={{ margin: "1.875rem 0" }}
           onSubmit={handleSubmit(handleSignUp)}
         >
           <Input
@@ -98,7 +96,7 @@ const LeftSide = () => {
             placeholder={"Digite seu nome"}
           />
           {!errors.name && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: nome
             </Text>
           )}
@@ -112,7 +110,7 @@ const LeftSide = () => {
             placeholder={"Digite seu email"}
           />
           {!errors.email && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: nome@mail.com
             </Text>
           )}
@@ -126,7 +124,7 @@ const LeftSide = () => {
             placeholder={"Digite sua senha"}
           />
           {!errors.password && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} mt={"y"} color={"gray.600"}>
               Ex: Sahaj@a5841
             </Text>
           )}
@@ -140,7 +138,7 @@ const LeftSide = () => {
             placeholder={"Confirme suas senha"}
           />
           {!errors.confirmPassword && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: Sahaj@a5841
             </Text>
           )}
@@ -154,7 +152,7 @@ const LeftSide = () => {
             placeholder={"Digite seu telefone"}
           />
           {!errors.confirmPassword && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: 99999999999
             </Text>
           )}
@@ -168,12 +166,17 @@ const LeftSide = () => {
             placeholder={"Adicione sua foto"}
           />
           {!errors.confirmPassword && (
-            <Text fontSize={"xs"} ml={"1"} mt={"1"} color={"gray.600"}>
+            <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: data:image/jpeg;base86,
             </Text>
           )}
 
-          <Button variant={"toEnter"} type={"submit"}>
+          <Button
+            style={{ marginTop: "1.875rem" }}
+            alignSelf={"center"}
+            variant={"toEnter"}
+            type={"submit"}
+          >
             Cadastrar
           </Button>
         </Stack>
