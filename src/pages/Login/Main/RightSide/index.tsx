@@ -15,18 +15,12 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 import ModalError from "../../../../components/Modal/ModalError";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
 
-  const {
-    isOpen: isModalSuccess,
-    onOpen: onModalSuccess,
-    onClose: onModalSuccessClose,
-  } = useDisclosure();
   const {
     isOpen: isModalError,
     onOpen: onModalError,
@@ -47,7 +41,6 @@ const RightSide = () => {
     signIn(body)
       .then((_) => {
         setLoading(false);
-        onModalSuccess();
       })
       .catch((err) => {
         setLoading(false);
@@ -57,7 +50,6 @@ const RightSide = () => {
 
   return (
     <>
-      <ModalSuccess isOpen={isModalSuccess} onClose={onModalSuccessClose} />
       <ModalError
         isOpen={isModalError}
         onClose={onModalErrorClose}
