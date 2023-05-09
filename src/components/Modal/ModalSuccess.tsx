@@ -32,14 +32,15 @@ const ModalSuccess = ({
         <ModalHeader>Yeess..</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>Seu cadastro deu super certo, vamos lá</Text>
+          <Text textAlign={"center"}>
+            Seu cadastro deu super certo, vamos lá
+          </Text>
         </ModalBody>
 
-        <ModalFooter>
+        <ModalFooter mx={"auto"}>
           <Button colorScheme="blue" mr={3} onClick={onClick}>
             {buttonText}
           </Button>
-          {/* <Button variant="ghost">Secondary Action</Button> */}
         </ModalFooter>
       </ModalContent>
     </Modal>
