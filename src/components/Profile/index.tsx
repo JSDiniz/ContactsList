@@ -5,15 +5,14 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Button,
+  Text,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
+import { FaEnvelope, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useAuth } from "../../contexts/Auth";
 import { Input } from "../Form";
 import { useForm } from "react-hook-form";
-import { IUpdate, IUserReq } from "../../interface/User";
+import { IUpdate } from "../../interface/User";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateUserSchemasReq } from "../../schemas/Register";
 
@@ -53,8 +52,12 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
             error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
-            mb={4}
           />
+          {!errors.name && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: nome
+            </Text>
+          )}
 
           <Input
             type={"email"}
@@ -64,8 +67,12 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
             error={errors.email}
             {...register("email")}
             placeholder={"Digite seu login"}
-            mb={4}
           />
+          {!errors.email && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: nome@mail.com
+            </Text>
+          )}
 
           <Input
             icon={FaMobile}
@@ -75,8 +82,12 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
             error={errors.telephone}
             {...register("telephone")}
             placeholder={"Confirme suas telefone"}
-            mb={4}
           />
+          {!errors.telephone && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: 99999999999
+            </Text>
+          )}
 
           <Input
             icon={FaCamera}
@@ -86,18 +97,26 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
             error={errors.imageUrl}
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
-            mb={4}
           />
+          {!errors.imageUrl && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: data:image/jpeg;base86
+            </Text>
+          )}
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button w={"6.25em"} variant={"toEnter"} mr={3} onClick={onClose}>
             Cancelar
           </Button>
-          <Button onClick={() => deleteUser(user.id, token)} mr={3}>
+          <Button
+            variant={"excluir"}
+            onClick={() => deleteUser(user.id, token)}
+            mr={3}
+          >
             Excluir
           </Button>
-          <Button type="submit" variant="ghost">
+          <Button type="submit" variant="register" w={"6.25em"}>
             Salvar
           </Button>
         </ModalFooter>
