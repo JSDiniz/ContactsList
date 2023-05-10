@@ -6,6 +6,7 @@ import {
   ModalFooter,
   ModalBody,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { FaEnvelope, FaUser, FaMobile, FaCamera } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -68,8 +69,12 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.name}
             {...register("name")}
             placeholder={"Digite seu nome"}
-            mb={4}
           />
+          {!errors.name && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: nome
+            </Text>
+          )}
 
           <Input
             type={"email"}
@@ -78,8 +83,12 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.email}
             {...register("email")}
             placeholder={"Digite seu email"}
-            mb={4}
           />
+          {!errors.email && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: nome@mail.com
+            </Text>
+          )}
 
           <Input
             icon={FaMobile}
@@ -88,8 +97,12 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.telephone}
             {...register("telephone")}
             placeholder={"Digite seu telefone"}
-            mb={4}
           />
+          {!errors.telephone && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: 99999999999
+            </Text>
+          )}
 
           <Input
             icon={FaCamera}
@@ -98,15 +111,19 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             error={errors.imageUrl}
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
-            mb={4}
           />
+          {!errors.imageUrl && (
+            <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+              Ex: data:image/jpeg;base86
+            </Text>
+          )}
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button variant={"toEnter"} w={"6.25em"} mr={3} onClick={onClose}>
             Cancelar
           </Button>
-          <Button type={"submit"} variant="ghost">
+          <Button type={"submit"} variant={"register"} w={"6.25em"}>
             Salvar
           </Button>
         </ModalFooter>

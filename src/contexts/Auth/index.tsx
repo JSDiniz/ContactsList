@@ -69,7 +69,8 @@ const AuthProvider = ({ children }: IAuthProvider) => {
         },
       })
         .then((res) => {
-          console.log(res);
+          const { data: user } = res;
+          setdata({ token, user });
         })
         .catch((err) => console.log(err));
     },
