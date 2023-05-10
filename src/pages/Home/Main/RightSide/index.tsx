@@ -30,14 +30,13 @@ const RightSide = () => {
         pr={["10px", "10px", "0", "0"]}
         textAlign={["center", "center", "unset"]}
       >
-        Com uma interface intuitiva e fácil de usar, o Contact Lists é a escolha
-        perfeita para empresário, empreendedores e profissionais de vendas que
-        desejam manter um controle completo de seus clientes e contatos
+        O <strong>Contacts List</strong> é a ferramenta ideal para o seu
+        negócio, de fácil utilização e uma interface descomplicada com a gestão
+        completa de seu clientes e contatos. Idealizada para empresários,
+        empreendedores e profissionais em vendas.
       </Text>
     </Flex>
   );
 };
 
 export default RightSide;
-
-// fontSize={["2xl", "4xl"]}

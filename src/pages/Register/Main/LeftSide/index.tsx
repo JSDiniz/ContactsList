@@ -77,14 +77,14 @@ const LeftSide = () => {
         maxW={"480px"}
         w={["full", "full", "50%", "50%"]}
         gap={8}
-        style={{ marginTop: "1.875rem" }}
+        style={{ marginTop: "2.5rem" }}
       >
         <Heading as={"h1"}>Crie sua conta</Heading>
 
         <Stack
           as={"form"}
           w={"full"}
-          style={{ margin: "1.875rem 0" }}
+          style={{ margin: "0" }}
           onSubmit={handleSubmit(handleSignUp)}
         >
           <Input

@@ -19,6 +19,7 @@ import ModalError from "../../../../components/Modal/ModalError";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const { signIn } = useAuth();
 
   const {
@@ -62,6 +63,7 @@ const RightSide = () => {
         h={"full"}
         maxW={"480px"}
         w={["full", "full", "50%", "50%"]}
+        my={"2.5rem"}
       >
         <Heading as={"h1"} textAlign={"center"}>
           Login
@@ -128,7 +130,12 @@ const RightSide = () => {
               </Text>
             </Link>
 
-            <Button variant={"register"}>Cadastre-se </Button>
+            <Button
+              onClick={() => history.push("/register")}
+              variant={"register"}
+            >
+              Cadastre-se
+            </Button>
           </VStack>
         </VStack>
       </Box>
