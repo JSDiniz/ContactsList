@@ -15,8 +15,8 @@ import Profile from "../../../Profile";
 const NavLogged = () => {
   const { logout } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { user } = useAuth();
+
   return (
     <Menu>
       {isOpen && <Profile isOpen={isOpen} onClose={onClose} />}

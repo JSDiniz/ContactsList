@@ -167,7 +167,7 @@ const LeftSide = () => {
           />
           {!errors.confirmPassword && (
             <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
-              Ex: data:image/jpeg;base86,
+              Ex: data:image/jpeg;base86
             </Text>
           )}
 
