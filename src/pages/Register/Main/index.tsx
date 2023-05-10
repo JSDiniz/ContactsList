@@ -17,6 +17,7 @@ const Main = () => {
         "space-between",
       ]}
       flexDir={["column", "column", "row", "row"]}
+      mb={"1.875rem"}
     >
       <LeftSide />
       <RightSide />
