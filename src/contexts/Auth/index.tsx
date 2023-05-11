@@ -1,9 +1,9 @@
-import { createContext, useContext, useCallback, useState } from "react";
 import { Api } from "../../services";
-import { IAuthContext, IAuthProvider } from "../../interface/contexts";
-import { IAuthUser, IUpdate } from "../../interface/User";
 import { Ilogin } from "../../interface/Login";
 import { IContactsUser } from "../../interface/Contacts";
+import { IAuthUser, IUpdate } from "../../interface/User";
+import { IAuthContext, IAuthProvider } from "../../interface/contexts";
+import { createContext, useContext, useCallback, useState } from "react";
 
 const AuthContex = createContext<IAuthContext>({} as IAuthContext);
 

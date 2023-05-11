@@ -1,5 +1,5 @@
-import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import Search from "../../../../components/Search";
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import CreateContacts from "../../../../components/CreateContacts";
 
 const LeftSide = () => {

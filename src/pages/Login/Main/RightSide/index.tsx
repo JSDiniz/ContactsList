@@ -1,24 +1,25 @@
+import {
+  Box,
+  Text,
+  Button,
+  VStack,
+  Heading,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 import { Input } from "../../../../components/Form";
 import { useAuth } from "../../../../contexts/Auth";
-import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Ilogin } from "../../../../interface/Login";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../../../schemas/Login";
-import {
-  Box,
-  VStack,
-  Heading,
-  Button,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
 import ModalError from "../../../../components/Modal/ModalError";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
+  const [eye, setEye] = useState(false);
   const history = useHistory();
   const { signIn } = useAuth();
 
@@ -96,7 +97,9 @@ const RightSide = () => {
             <Input
               icon={FaLock}
               label={"Senha"}
-              type={"password"}
+              type={eye ? "text" : "password"}
+              iconRight={eye ? FaEye : FaEyeSlash}
+              onClick={() => setEye(!eye)}
               error={errors.password}
               {...register("password")}
               placeholder={"Digite sua senha"}

@@ -1,6 +1,6 @@
-import { Flex } from "@chakra-ui/react";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
+import { Flex } from "@chakra-ui/react";
 
 const Main = () => {
   return (

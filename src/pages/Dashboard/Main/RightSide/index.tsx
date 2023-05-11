@@ -1,7 +1,7 @@
-import { Wrap, WrapItem } from "@chakra-ui/react";
-import Cards from "../../../../components/Cards";
-import { useAuth } from "../../../../contexts/Auth";
 import { useEffect, useState } from "react";
+import Cards from "../../../../components/Cards";
+import { Wrap, WrapItem } from "@chakra-ui/react";
+import { useAuth } from "../../../../contexts/Auth";
 import { useContacts } from "../../../../contexts/Contact";
 
 const RightSide = () => {
