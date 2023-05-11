@@ -1,9 +1,11 @@
+import { useAuth } from "../Auth";
+import { Api } from "../../services";
+import { AxiosResponse } from "axios";
+import { IContactsUser } from "../../interface/Contacts";
+import { IContact } from "../../components/CreateContacts";
+import { IEditContact } from "../../components/EditContact";
 import { createContext, useCallback, useContext } from "react";
 import { IContactsContext, IAuthProvider } from "../../interface/contexts";
-import { Api } from "../../services";
-import { ICreateContactsUser, IContactsUser } from "../../interface/Contacts";
-import { AxiosResponse } from "axios";
-import { useAuth } from "../Auth";
 
 const ContactsContext = createContext<IContactsContext>({} as IContactsContext);
 
@@ -35,20 +37,17 @@ const ContactProvider = ({ children }: IAuthProvider) => {
     }
   }, []);
 
-  const createContacts = useCallback(
-    async (body: ICreateContactsUser, token: string) => {
-      await Api.post("/contacts", body, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res: AxiosResponse<IContactsUser>) =>
-          setContacts((oldContacts) => [...oldContacts, res.data])
-        )
-        .catch((err) => console.log(err));
-    },
-    []
-  );
+  const createContacts = useCallback(async (body: IContact, token: string) => {
+    await Api.post("/contacts", body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res: AxiosResponse<IContactsUser>) =>
+        setContacts((oldContacts) => [...oldContacts, res.data])
+      )
+      .catch((err) => console.log(err));
+  }, []);
 
   const deleteContacts = useCallback(
     async (contactId: string, token: string) => {
@@ -69,8 +68,8 @@ const ContactProvider = ({ children }: IAuthProvider) => {
   );
 
   const updateContact = useCallback(
-    async (contactId: string, body: ICreateContactsUser, token: string) => {
-      await Api.patch(`/contacts/${contactId}`, body, {
+    async (body: IEditContact, token: string) => {
+      await Api.patch(`/contacts/${body.id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -86,7 +85,6 @@ const ContactProvider = ({ children }: IAuthProvider) => {
   return (
     <ContactsContext.Provider
       value={{
-        contacts,
         createContacts,
         loadContacts,
         deleteContacts,
