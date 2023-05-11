@@ -28,7 +28,16 @@ const inputVariants: inputVariantsOptions = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  { name, label, error = null, icon: Icon, defaultValue, ...rest },
+  {
+    name,
+    label,
+    error = null,
+    icon: Icon,
+    iconRight: IconR,
+    defaultValue,
+    onClick,
+    ...rest
+  },
   ref
 ) => {
   const [variants, setVariants] = useState("default");
@@ -85,8 +94,27 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           ref={ref}
           {...rest}
         />
+        {IconR && (
+          <InputRightElement
+            as={"button"}
+            type={"button"}
+            mt={"1.5px"}
+            onClick={onClick}
+            _hover={{ color: "orange.600" }}
+            cursor={"pointer"}
+          >
+            <IconR />
+          </InputRightElement>
+        )}
 
-        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+        {!!error && (
+          <FormErrorMessage
+            color={inputVariants[variants]}
+            style={{ margin: "6px 4px 8px 4px" }}
+          >
+            {error.message}
+          </FormErrorMessage>
+        )}
       </InputGroup>
     </FormControl>
   );

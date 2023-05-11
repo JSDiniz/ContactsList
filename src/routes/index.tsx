@@ -1,9 +1,9 @@
-import { Switch } from "react-router-dom";
+import Route from "./Route";
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Home from "../pages/Home";
+import { Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
-import Route from "./Route";
 
 const Routed = () => {
   return (

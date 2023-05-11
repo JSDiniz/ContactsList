@@ -1,31 +1,43 @@
 import {
-  VStack,
-  Stack,
-  Heading,
-  Button,
-  useDisclosure,
   Text,
+  Stack,
+  Button,
+  VStack,
+  Heading,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { Input } from "../../../../components/Form";
-import { FaEnvelope, FaLock, FaUser, FaMobile, FaCamera } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaLock,
+  FaUser,
+  FaMobile,
+  FaCamera,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Api } from "../../../../services";
+import { useHistory } from "react-router-dom";
+import { Input } from "../../../../components/Form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IUserReq } from "../../../../interface/User";
 import { userSchemasReq } from "../../../../schemas/Register";
-import { useState } from "react";
-import { Api } from "../../../../services";
-import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 import ModalError from "../../../../components/Modal/ModalError";
-import { useHistory } from "react-router-dom";
+import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 
 const LeftSide = () => {
   const [loading, setLoading] = useState(false);
+  const [eye, setEye] = useState(false);
+  const [verifyEye, setVerifyEye] = useState(false);
   const history = useHistory();
+
   const {
     isOpen: isModalSuccess,
     onOpen: onModalSuccess,
     onClose: onModalSuccessClose,
   } = useDisclosure();
+
   const {
     isOpen: isModalError,
     onOpen: onModalError,
@@ -118,7 +130,9 @@ const LeftSide = () => {
           <Input
             icon={FaLock}
             label={"Senha"}
-            type={"password"}
+            type={eye ? "text" : "password"}
+            iconRight={eye ? FaEye : FaEyeSlash}
+            onClick={() => setEye(!eye)}
             error={errors.password}
             {...register("password")}
             placeholder={"Digite sua senha"}
@@ -131,11 +145,13 @@ const LeftSide = () => {
 
           <Input
             icon={FaLock}
-            label={"Senha"}
-            type={"password"}
+            label={"Verifique a senha"}
+            type={verifyEye ? "text" : "password"}
+            iconRight={verifyEye ? FaEye : FaEyeSlash}
+            onClick={() => setVerifyEye(!verifyEye)}
             error={errors.confirmPassword}
             {...register("confirmPassword")}
-            placeholder={"Confirme suas senha"}
+            placeholder={"Verifique a senha"}
           />
           {!errors.confirmPassword && (
             <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
@@ -151,7 +167,7 @@ const LeftSide = () => {
             {...register("telephone")}
             placeholder={"Digite seu telefone"}
           />
-          {!errors.confirmPassword && (
+          {!errors.telephone && (
             <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: 99999999999
             </Text>
@@ -165,7 +181,7 @@ const LeftSide = () => {
             {...register("imageUrl")}
             placeholder={"Adicione sua foto"}
           />
-          {!errors.confirmPassword && (
+          {!errors.imageUrl && (
             <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: data:image/jpeg;base86
             </Text>
