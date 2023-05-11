@@ -1,22 +1,21 @@
 import {
+  Card,
+  Icon,
+  Text,
+  Stack,
   HStack,
   Button,
-  Card,
+  Avatar,
+  Heading,
   CardBody,
   CardFooter,
-  Heading,
-  Icon,
-  Image,
-  Stack,
-  Text,
-  Avatar,
   useDisclosure,
 } from "@chakra-ui/react";
+import EditContact from "../EditContact";
+import { useAuth } from "../../contexts/Auth";
+import { useContacts } from "../../contexts/Contact";
 import { FaEnvelope, FaMobile } from "react-icons/fa";
 import { IContactsRes } from "../../interface/Contacts";
-import { useContacts } from "../../contexts/Contact";
-import { useAuth } from "../../contexts/Auth";
-import EditContact from "../EditContact";
 
 interface IContactProps {
   contact: IContactsRes;
@@ -24,7 +23,7 @@ interface IContactProps {
 
 const Cards = ({ contact }: IContactProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { deleteContacts, updateContact } = useContacts();
+  const { deleteContacts } = useContacts();
   const { token } = useAuth();
   return (
     <>
@@ -46,17 +45,19 @@ const Cards = ({ contact }: IContactProps) => {
             src={contact.imageUrl}
           />
 
-          <Stack alignItems={"center"} mt={4} w={"full"} spacing={4}>
-            <Heading as={"h3"} fontSize={"xl"}>
+          <Stack mt={4} w={"full"} spacing={4}>
+            <Heading textAlign={"center"} as={"h3"} fontSize={"xl"}>
               {contact.name}
             </Heading>
             <HStack>
               <Icon as={FaMobile} />
               <Text fontSize={"sm"}>{contact.phones[0].telephone}</Text>
             </HStack>
-            <HStack>
+            <HStack w={"100%"}>
               <Icon as={FaEnvelope} />
-              <Text fontSize={"sm"}>{contact.emails[0].email}</Text>
+              <Text noOfLines={1} fontSize={"sm"} w={"100%"}>
+                {contact.emails[0].email}{" "}
+              </Text>
             </HStack>
           </Stack>
         </CardBody>
