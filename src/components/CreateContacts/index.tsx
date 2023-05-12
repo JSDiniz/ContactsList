@@ -1,6 +1,7 @@
 import {
   Text,
   Modal,
+  Center,
   Button,
   VStack,
   ModalBody,
@@ -8,6 +9,8 @@ import {
   ModalHeader,
   ModalContent,
   ModalOverlay,
+  Image,
+  Avatar,
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { SchemaOf } from "yup";
@@ -19,6 +22,7 @@ import { FaUser, FaCamera } from "react-icons/fa";
 import { useContacts } from "../../contexts/Contact";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
 
 interface ICreateContactsProps {
   isOpen: boolean;
@@ -65,8 +69,9 @@ const contactSchemas: SchemaOf<IContact> = yup.object().shape({
 });
 
 const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
-  const { token } = useAuth();
   const { createContacts } = useContacts();
+  const [image, setImage] = useState("");
+  const { token } = useAuth();
 
   const methods = useForm<IContact>({
     resolver: yupResolver(contactSchemas),
@@ -75,6 +80,10 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
   const handleCreateContacts: SubmitHandler<IContact> = (data: IContact) => {
     createContacts(data, token);
     onClose();
+  };
+
+  const previewImage = (e: any) => {
+    setImage(e.target?.value);
   };
 
   return (
@@ -88,11 +97,21 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
             onSubmit={methods.handleSubmit(handleCreateContacts)}
             w={"100%"}
           >
-            <ModalBody w={"100%"}>
+            <ModalBody w={"100%"} py={"0"}>
+              <Center w={"100%"} mb={"2"}>
+                <Avatar
+                  size={"xl"}
+                  bg={"transparent"}
+                  border={"1px"}
+                  borderColor={"orange.600"}
+                  borderRadius={"10px"}
+                  icon={<FaUser fontSize={"2.5rem"} color={"orange.600"} />}
+                  src={image ? image : ""}
+                />
+              </Center>
               <Input
                 type={"text"}
                 label={"Name"}
-                icon={FaUser}
                 error={methods.formState.errors.name}
                 {...methods.register("name")}
                 placeholder={"Digite seu nome"}
@@ -107,10 +126,10 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
               <InputEmail />
 
               <Input
-                id="imageUrl"
                 icon={FaCamera}
                 label={"Adicione foto"}
                 type={"url"}
+                onChangeCapture={(e) => previewImage(e)}
                 error={methods.formState.errors.imageUrl}
                 {...methods.register("imageUrl")}
                 placeholder={"Adicione sua foto"}
