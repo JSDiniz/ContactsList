@@ -163,11 +163,11 @@ const LeftSide = () => {
             icon={FaMobile}
             label={"Telefone"}
             type={"tel"}
-            error={errors.telephone}
-            {...register("telephone")}
+            error={errors.phone}
+            {...register("phone")}
             placeholder={"Digite seu telefone"}
           />
-          {!errors.telephone && (
+          {!errors.phone && (
             <Text fontSize={"xs"} ml={"1"} my={"1"} color={"gray.600"}>
               Ex: 99999999999
             </Text>
