@@ -3,16 +3,22 @@ import { IPhones, IPhonesRes } from "../Phones";
 
 export interface ICreateContacts {
   name: string;
-  telephone: string;
+  phone: string;
   email: string;
-  imageUrl?: string;
+  imageUrl?: string | null | undefined;
+  githubUrl?: string | null | undefined;
+  linkedinUrl?: string | null | undefined;
+  portfolioUrl?: string | null | undefined;
 }
 
 export interface IContacts {
   name: string;
   phones: Array<IPhones>;
   emails: Array<IEmails>;
-  imageUrl?: string;
+  imageUrl?: string | null | undefined;
+  githubUrl?: string | null | undefined;
+  linkedinUrl?: string | null | undefined;
+  portfolioUrl?: string | null | undefined;
 }
 
 export interface IContactsRes {
@@ -22,7 +28,10 @@ export interface IContactsRes {
   updatedAt: Date;
   phones: Array<IPhonesRes>;
   emails: Array<IEmailsRes>;
-  imageUrl: string;
+  imageUrl?: string | null | undefined;
+  githubUrl?: string | null | undefined;
+  linkedinUrl?: string | null | undefined;
+  portfolioUrl?: string | null | undefined;
 }
 
 export interface IContactsUser extends IContactsRes {
@@ -30,8 +39,11 @@ export interface IContactsUser extends IContactsRes {
     id: string;
     name: string;
     email: string;
-    telephone: string;
-    imageUrl: string;
+    phone: string;
+    imageUrl?: string | null | undefined;
+    githubUrl?: string | null | undefined;
+    linkedinUrl?: string | null | undefined;
+    portfolioUrl?: string | null | undefined;
     isAdmin: false;
     isActive: true;
     createdAt: Date;
