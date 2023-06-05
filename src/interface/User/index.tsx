@@ -4,7 +4,7 @@ export interface IUserReq {
   name: string;
   email: string;
   password: string;
-  telephone: string;
+  phone: string;
   imageUrl?: string;
   confirmPassword: string;
 }
@@ -14,7 +14,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  telephone: string;
+  phone: string;
   imageUrl: string;
 }
 
@@ -30,6 +30,6 @@ export interface IUserContacts extends IUser {
 export interface IUpdate {
   name: string;
   email: string;
-  telephone: string;
+  phone: string;
   imageUrl?: string;
 }
