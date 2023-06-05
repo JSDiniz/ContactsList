@@ -29,6 +29,7 @@ import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 const LeftSide = () => {
   const [loading, setLoading] = useState(false);
   const [eye, setEye] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [verifyEye, setVerifyEye] = useState(false);
   const history = useHistory();
 
@@ -59,11 +60,13 @@ const LeftSide = () => {
 
     Api.post("/users", body)
       .then((res) => {
+        console.log(res);
         setLoading(false);
         onModalSuccess();
       })
       .catch((err) => {
         console.log(err);
+        setErrorMessage(err.response.data["message"]);
         setLoading(false);
         onModalError();
       });
@@ -75,12 +78,15 @@ const LeftSide = () => {
         isOpen={isModalSuccess}
         onClose={onModalSuccessClose}
         onClick={() => history.push("/login")}
-        buttonText={"Ir para o login agora"}
+        mensage={"Seu cadastro deu super certo, vamos lá"}
+        secondaryTex="Você já pode começar criando suas <b>listas de contatos</b> agora mesmo......"
+        texButton={"Ir para o login agora"}
       />
+
       <ModalError
         isOpen={isModalError}
         onClose={onModalErrorClose}
-        error={"Seu email já está em uso"}
+        error={errorMessage}
         secondaryTex="Você já pode tentar novamente, <b>clicando</b> no botão acima ou
         aguarde alguns minutos..."
       />
@@ -175,7 +181,7 @@ const LeftSide = () => {
 
           <Input
             icon={FaCamera}
-            label={"Adicione foto"}
+            label={"Avatar"}
             type={"url"}
             error={errors.imageUrl}
             {...register("imageUrl")}
