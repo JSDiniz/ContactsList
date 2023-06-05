@@ -3,11 +3,15 @@ import { SchemaOf } from "yup";
 import { IPhones } from "../../interface/Phones";
 
 const phonesSchemas: SchemaOf<IPhones> = yup.object().shape({
-  telephone: yup
+  phone: yup
     .string()
-    .max(11)
+    .min(9)
+    .max(20)
     .required("Campo obrigatório")
-    .matches(/^[0-9]([0-9]{8}|[0-9]{9})/, "Must be a valid phone number"),
+    .matches(
+      /^[0-9]([0-9]{8}|[0-9]{9})/,
+      "Deve ser um número de telefone válido"
+    ),
 });
 
 export default phonesSchemas;

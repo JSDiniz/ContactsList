@@ -78,12 +78,12 @@ const Profile = ({ isOpen, onClose }: IProfile) => {
             icon={FaMobile}
             label={"Telefone"}
             type={"tel"}
-            defaultValue={user.telephone}
-            error={errors.telephone}
-            {...register("telephone")}
+            defaultValue={user.phone}
+            error={errors.phone}
+            {...register("phone")}
             placeholder={"Confirme suas telefone"}
           />
-          {!errors.telephone && (
+          {!errors.phone && (
             <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
               Ex: 99999999999
             </Text>
