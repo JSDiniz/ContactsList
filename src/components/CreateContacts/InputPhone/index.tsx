@@ -22,11 +22,11 @@ const InputPhone = () => {
   });
 
   useEffect(() => {
-    update(0, { telephone: "" });
+    update(0, { phone: "" });
   }, [remove]);
 
   const addPhone = () => {
-    append({ telephone: "" });
+    append({ phone: "" });
   };
 
   return (
@@ -40,13 +40,13 @@ const InputPhone = () => {
             defaultValue=""
             iconRight={index > 0 && FaMinus}
             onClick={() => remove(index)}
-            error={errors?.phones?.[index]?.telephone}
-            {...register(`phones.${index}.telephone`)}
+            error={errors?.phones?.[index]?.phone}
+            {...register(`phones.${index}.phone`)}
             placeholder={"Digite seu telefone"}
             pr={"10"}
           />
 
-          {!errors?.phones?.[index]?.telephone && (
+          {!errors?.phones?.[index]?.phone && (
             <Text
               fontSize={"xs"}
               style={{ margin: "4px 4px 8px 4px" }}

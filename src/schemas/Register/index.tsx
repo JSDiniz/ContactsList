@@ -14,7 +14,7 @@ const userSchemasReq: SchemaOf<IUserReq> = yup.object().shape({
     .string()
     .required("Confirmação de senha obrigatório")
     .oneOf([yup.ref("password")], "Senhas diferentes"),
-  telephone: yup
+  phone: yup
     .string()
     .max(11)
     .required("Telefone Obrigatorio")
@@ -29,7 +29,7 @@ const updateUserSchemasReq: SchemaOf<IUpdate> = yup.object().shape({
     .email("E-mail inválido")
     .max(60)
     .required("E-mail obrigatorioE-mail obrigatorio"),
-  telephone: yup
+  phone: yup
     .string()
     .max(11)
     .required("Telefone Obrigatorio")

@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const Api = axios.create({
-  baseURL: "https://contacts-list-api-tye2.onrender.com",
+  baseURL: "http://localhost:3000",
   timeout: 5000,
 });

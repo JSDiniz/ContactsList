@@ -5,12 +5,17 @@ import { IContactsRes } from "../../../interface/Contacts";
 import { FaMobile, FaPlus, FaMinus } from "react-icons/fa";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Box, Icon, Text, VStack, HStack, FormLabel } from "@chakra-ui/react";
+import { useContacts } from "../../../contexts/Contact";
+import { useAuth } from "../../../contexts/Auth";
 
 interface IcontactProps {
   contact: IContactsRes;
 }
 
-const EditInputPhone = ({ contact }: IcontactProps) => {
+const EditInputEmail = ({ contact }: IcontactProps) => {
+  const { deleteEmail } = useContacts();
+  const { token } = useAuth();
+
   const {
     control,
     register,
@@ -30,14 +35,21 @@ const EditInputPhone = ({ contact }: IcontactProps) => {
     contact.emails.map((e_mail, index) =>
       update(index, { email: `${e_mail.email}`, id: `${e_mail.id}` })
     );
-  }, [remove]);
+  }, [remove, contact]);
 
-  const addPhone = () => {
-    append({ email: "", id: "" });
+  const removeEmail = (id: number) => {
+    const email = fields.find((item, index) => index === id)?.email;
+    const emailId = contact.emails.find((items) => items.email === email);
+
+    if (email && emailId) {
+      deleteEmail(emailId.id, token);
+    }
+
+    remove(id);
   };
 
   return (
-    <Box mb={"2"} w={"100%"}>
+    <Box w={"100%"}>
       <FormLabel>Email</FormLabel>
       {fields.map((field, index) => (
         <VStack key={field.id} gap={"1px"} position={"relative"}>
@@ -46,7 +58,7 @@ const EditInputPhone = ({ contact }: IcontactProps) => {
             type={"email"}
             defaultValue=""
             iconRight={index > 0 && FaMinus}
-            onClick={() => remove(index)}
+            onClick={() => removeEmail(index)}
             error={errors?.emails?.[index]?.email}
             {...register(`emails.${index}.email`)}
             placeholder={"Digite seu email"}
@@ -65,18 +77,8 @@ const EditInputPhone = ({ contact }: IcontactProps) => {
           )}
         </VStack>
       ))}
-      <HStack
-        as={"button"}
-        type={"button"}
-        _hover={{ color: "orange.600" }}
-        cursor={"pointer"}
-        onClick={addPhone}
-      >
-        <Icon as={FaPlus} fontSize={"xs"} />
-        <Text fontSize={"xs"}>Adicionar novo email</Text>
-      </HStack>
     </Box>
   );
 };
 
-export default EditInputPhone;
+export default EditInputEmail;
