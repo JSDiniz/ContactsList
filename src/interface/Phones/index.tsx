@@ -1,8 +1,8 @@
 export interface IPhones {
-  telephone: string;
+  phone: string;
 }
 
 export interface IPhonesRes {
   id: string;
-  telephone: string;
+  phone: string;
 }
