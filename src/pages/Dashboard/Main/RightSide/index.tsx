@@ -4,11 +4,6 @@ import { UnorderedList, ListItem } from "@chakra-ui/react";
 import { useAuth } from "../../../../contexts/Auth";
 import { useContacts } from "../../../../contexts/Contact";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/bundle";
-
 const RightSide = () => {
   const [loading, setLoading] = useState(true);
   const { user, token, contacts } = useAuth();
