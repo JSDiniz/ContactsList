@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalContent,
   ModalOverlay,
-  Image,
   Avatar,
 } from "@chakra-ui/react";
 import * as yup from "yup";
@@ -33,11 +32,14 @@ export interface IContact {
   name: string;
   phones: IPhone[];
   emails: IEmail[];
-  imageUrl: string | undefined | object;
+  imageUrl?: string | null | undefined;
+  githubUrl?: string | null | undefined;
+  linkedinUrl?: string | null | undefined;
+  portfolioUrl?: string | null | undefined;
 }
 
 interface IPhone {
-  telephone: string;
+  phone: string;
 }
 
 interface IEmail {
@@ -50,7 +52,7 @@ const contactSchemas: SchemaOf<IContact> = yup.object().shape({
     .array()
     .of(
       yup.object().shape({
-        telephone: yup.string().required("O campo é obrigatório."),
+        phone: yup.string().required("O campo é obrigatório."),
       })
     )
     .required(),
@@ -66,6 +68,9 @@ const contactSchemas: SchemaOf<IContact> = yup.object().shape({
     )
     .required(),
   imageUrl: yup.string().optional(),
+  githubUrl: yup.string().optional(),
+  linkedinUrl: yup.string().optional(),
+  portfolioUrl: yup.string().optional(),
 });
 
 const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
@@ -127,16 +132,58 @@ const CreateContacts = ({ isOpen, onClose }: ICreateContactsProps) => {
 
               <Input
                 icon={FaCamera}
-                label={"Adicione foto"}
+                label={"Adicione avatar"}
                 type={"url"}
                 onChangeCapture={(e) => previewImage(e)}
                 error={methods.formState.errors.imageUrl}
                 {...methods.register("imageUrl")}
                 placeholder={"Adicione sua foto"}
               />
-              {!methods.formState.errors.imageUrl && (
+              {!methods.formState.errors.githubUrl && (
                 <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
                   Ex: data:image/jpeg;base86
+                </Text>
+              )}
+
+              <Input
+                icon={FaCamera}
+                label={"Adicione github"}
+                type={"url"}
+                error={methods.formState.errors.githubUrl}
+                {...methods.register("githubUrl")}
+                placeholder={"Adicione sua foto"}
+              />
+              {!methods.formState.errors.githubUrl && (
+                <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+                  Ex: https://github.com/name
+                </Text>
+              )}
+
+              <Input
+                icon={FaCamera}
+                label={"Adicione linkedin"}
+                type={"url"}
+                error={methods.formState.errors.linkedinUrl}
+                {...methods.register("linkedinUrl")}
+                placeholder={"Adicione sua foto"}
+              />
+              {!methods.formState.errors.linkedinUrl && (
+                <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+                  Ex: https://linkedin.com/in/name/
+                </Text>
+              )}
+
+              <Input
+                icon={FaCamera}
+                label={"Adicione portfolio"}
+                type={"url"}
+                error={methods.formState.errors.portfolioUrl}
+                {...methods.register("portfolioUrl")}
+                placeholder={"Adicione sua foto"}
+              />
+              {!methods.formState.errors.portfolioUrl && (
+                <Text fontSize={"xs"} m={"1"} mb={"2"} color={"gray.600"}>
+                  Ex: https://portfolio.com
                 </Text>
               )}
             </ModalBody>
