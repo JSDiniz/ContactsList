@@ -2,6 +2,7 @@ import {
   Card,
   Icon,
   Text,
+  Link,
   Stack,
   HStack,
   Button,
@@ -14,7 +15,8 @@ import {
 import EditContact from "../EditContact";
 import { useAuth } from "../../contexts/Auth";
 import { useContacts } from "../../contexts/Contact";
-import { FaEnvelope, FaMobile } from "react-icons/fa";
+import { FaEnvelope, FaMobile, FaGithub, FaLinkedin } from "react-icons/fa";
+import { BsLayoutTextWindow } from "react-icons/bs";
 import { IContactsRes } from "../../interface/Contacts";
 
 interface IContactProps {
@@ -25,33 +27,50 @@ const Cards = ({ contact }: IContactProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { deleteContacts } = useContacts();
   const { token } = useAuth();
+
   return (
     <>
       {isOpen && (
         <EditContact isOpen={isOpen} onClose={onClose} contact={contact} />
       )}
-      <Card maxW={56} minW={56} alignItems={"center"}>
+      <Card p={"10px"} maxW={56} minW={56} h={"341px"} alignItems={"center"}>
         <CardBody
-          p={"10px 10px 0 10px"}
+          p={"0"}
           w={"full"}
+          h={"full"}
           display={"flex"}
           flexDir={"column"}
           alignItems={"center"}
+          gap={"4"}
         >
           <Avatar
             borderRadius={"10px"}
             size={"xl"}
             name={contact.name}
-            src={contact.imageUrl}
+            src={
+              contact?.githubUrl! !== ""
+                ? `${contact?.githubUrl!}.png`
+                : contact?.imageUrl!
+            }
           />
 
-          <Stack mt={4} w={"full"} spacing={4}>
-            <Heading textAlign={"center"} as={"h3"} fontSize={"xl"}>
+          <Stack
+            w={"full"}
+            h={"full"}
+            justifyContent={"space-evenly"}
+            gap={"4"}
+          >
+            <Heading
+              textAlign={"center"}
+              as={"h3"}
+              fontSize={"xl"}
+              noOfLines={2}
+            >
               {contact.name}
             </Heading>
             <HStack>
               <Icon as={FaMobile} />
-              <Text fontSize={"sm"}>{contact.phones[0].telephone}</Text>
+              <Text fontSize={"sm"}>{contact.phones[0].phone}</Text>
             </HStack>
             <HStack w={"100%"}>
               <Icon as={FaEnvelope} />
@@ -60,8 +79,25 @@ const Cards = ({ contact }: IContactProps) => {
               </Text>
             </HStack>
           </Stack>
+          <HStack w={"full"} justifyContent={"center"} gap={"4"}>
+            {contact?.githubUrl! !== "" && (
+              <Link href={`${contact?.githubUrl!}`} isExternal>
+                <Icon as={FaGithub} w={8} h={8} />
+              </Link>
+            )}
+            {contact?.linkedinUrl! !== "" && (
+              <Link href={`${contact?.linkedinUrl!}`} isExternal>
+                <Icon as={FaLinkedin} w={8} h={8} />
+              </Link>
+            )}
+            {contact?.portfolioUrl! !== "" && (
+              <Link href={`${contact?.portfolioUrl!}`} isExternal>
+                <Icon as={BsLayoutTextWindow} w={8} h={8} />
+              </Link>
+            )}
+          </HStack>
         </CardBody>
-        <CardFooter mt={4} p={"0 10px 10px 10px"} gap={4}>
+        <CardFooter mt={4} p={"0"} gap={4}>
           <Button onClick={() => deleteContacts(contact.id, token)}>
             Excluir
           </Button>
