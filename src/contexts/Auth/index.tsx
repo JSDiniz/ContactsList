@@ -29,9 +29,10 @@ const AuthProvider = ({ children }: IAuthProvider) => {
     return {} as IAuthUser;
   });
   const [contacts, setContacts] = useState<IContactsUser[]>([]);
+  const [contactsCopy, setContactsCopy] = useState<IContactsUser[]>([]);
 
   const signIn = useCallback(async (body: Ilogin) => {
-    const res = await Api.post("/login", body);
+    const res = await Api.post("/session", body);
 
     const { token, user } = res.data;
 
@@ -40,6 +41,7 @@ const AuthProvider = ({ children }: IAuthProvider) => {
 
     setdata({ token, user });
     setContacts(user.contacts);
+    setContactsCopy(user.contacts);
   }, []);
 
   const logout = useCallback(() => {
@@ -88,6 +90,8 @@ const AuthProvider = ({ children }: IAuthProvider) => {
         updateUser,
         contacts,
         setContacts,
+        contactsCopy,
+        setContactsCopy,
       }}
     >
       {children}
