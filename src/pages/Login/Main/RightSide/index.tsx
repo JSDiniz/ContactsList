@@ -16,12 +16,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../../../schemas/Login";
 import ModalError from "../../../../components/Modal/ModalError";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import ModalSuccess from "../../../../components/Modal/ModalSuccess";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [eye, setEye] = useState(false);
   const history = useHistory();
   const { signIn } = useAuth();
+
+  const {
+    isOpen: isModalSuccess,
+    onOpen: onModalSuccess,
+    onClose: onModalSuccessClose,
+  } = useDisclosure();
 
   const {
     isOpen: isModalError,
@@ -43,19 +51,30 @@ const RightSide = () => {
     signIn(body)
       .then((_) => {
         setLoading(false);
+        onModalSuccess();
       })
       .catch((err) => {
+        console.log(err);
+        setErrorMessage(err.response.data["message"]);
         setLoading(false);
         onModalError();
       });
+    console.log("test");
   };
 
   return (
     <>
+      <ModalSuccess
+        isOpen={isModalSuccess}
+        onClose={onModalSuccessClose}
+        mensage={"Login realizado com sucesso"}
+        secondaryTex=""
+      />
+
       <ModalError
         isOpen={isModalError}
         onClose={onModalErrorClose}
-        error={"Email ou senha invalido"}
+        error={errorMessage}
         secondaryTex="Você já pode tentar novamente, <b>clicando</b> no botão acima ou
         aguarde alguns minutos..."
       />

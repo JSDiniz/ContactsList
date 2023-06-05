@@ -36,7 +36,7 @@ const ModalError = ({
             w={"30px"}
             h={"30px"}
             borderRadius={"5px"}
-            mr={1}
+            mr={2}
           >
             <FaExclamation />
           </Center>
