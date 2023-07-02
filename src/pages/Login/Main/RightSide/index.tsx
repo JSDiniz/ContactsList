@@ -51,6 +51,7 @@ const RightSide = () => {
     signIn(body)
       .then((_) => {
         setLoading(false);
+        console.log(onModalSuccess);
         onModalSuccess();
       })
       .catch((err) => {
@@ -59,7 +60,6 @@ const RightSide = () => {
         setLoading(false);
         onModalError();
       });
-    console.log("test");
   };
 
   return (
