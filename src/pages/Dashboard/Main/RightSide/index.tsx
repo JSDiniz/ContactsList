@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Cards from "../../../../components/Cards";
-import { UnorderedList, ListItem } from "@chakra-ui/react";
+import { UnorderedList, ListItem, Text } from "@chakra-ui/react";
 import { useAuth } from "../../../../contexts/Auth";
 import { useContacts } from "../../../../contexts/Contact";
+import ModalContact from "../../../../components/Modal/ModalContact";
 
 const RightSide = () => {
   const [loading, setLoading] = useState(true);
@@ -27,13 +28,11 @@ const RightSide = () => {
       pt={"7"}
       pb={["4", "4", "0", "0"]}
     >
-      {contacts?.length !== 0
-        ? contacts?.map((contact) => (
-            <ListItem key={contact.id}>
-              <Cards contact={contact} />
-            </ListItem>
-          ))
-        : "Adicionar contatcs"}
+      {contacts?.map((contact) => (
+        <ListItem key={contact.id}>
+          <Cards contact={contact} />
+        </ListItem>
+      ))}
     </UnorderedList>
   );
 };
