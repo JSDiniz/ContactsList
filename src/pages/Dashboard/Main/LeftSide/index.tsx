@@ -19,7 +19,8 @@ const LeftSide = () => {
         <Button
           onClick={onOpen}
           fontSize={"sm"}
-          w={["full", "auto", "auto", "auto"]}
+          fontWeight={"500"}
+          variant={"primary"}
         >
           Adicionar Contacts
         </Button>
