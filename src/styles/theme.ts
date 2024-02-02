@@ -27,6 +27,11 @@ const theme = extendTheme({
         _light: "orange.600",
         _dark: "grey.100",
       },
+
+      NotFound_text: {
+        _light: "grey.100",
+        _dark: "orange.600",
+      },
     },
   },
 
