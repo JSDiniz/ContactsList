@@ -12,8 +12,14 @@ const Logo = () => {
       onClick={() => history.push("/")}
       cursor={"pointer"}
     >
-      <Icon as={FaRegAddressBook} fontSize={["2xl", "4xl"]} />
-      <Text variant="Heading-3-500">Contacts List</Text>
+      <Icon
+        as={FaRegAddressBook}
+        color={"secondary_text"}
+        fontSize={["2xl", "4xl"]}
+      />
+      <Text color={"secondary_text"} variant="Heading-3-500">
+        Contacts List
+      </Text>
     </Flex>
   );
 };
