@@ -34,6 +34,7 @@ const Search = () => {
         fontSize={"2xl"}
         bg={"gray.400"}
         onClick={() => handleSearch(firstName)}
+        _hover={{ bg: "orange.600" }}
       >
         <FaSearch />
       </Center>
