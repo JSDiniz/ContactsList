@@ -4,6 +4,7 @@ import { IContactsUser } from "../../interface/Contacts";
 import { IAuthUser, IUpdate } from "../../interface/User";
 import { IAuthContext, IAuthProvider } from "../../interface/contexts";
 import { createContext, useContext, useCallback, useState } from "react";
+import { useContacts } from "../Contact";
 
 const AuthContex = createContext<IAuthContext>({} as IAuthContext);
 
@@ -18,18 +19,22 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }: IAuthProvider) => {
+  const [contacts, setContacts] = useState<IContactsUser[]>([]);
+  const [contactsCopy, setContactsCopy] = useState<IContactsUser[]>([]);
+
   const [data, setdata] = useState<IAuthUser>(() => {
     const token = localStorage.getItem("@ContactsList:token");
     const user = localStorage.getItem("@ContactsList:user");
 
     if (token && user) {
+      setContacts(JSON.parse(user).contacts);
+      setContactsCopy(JSON.parse(user).contacts);
+
       return { token, user: JSON.parse(user) };
     }
 
     return {} as IAuthUser;
   });
-  const [contacts, setContacts] = useState<IContactsUser[]>([]);
-  const [contactsCopy, setContactsCopy] = useState<IContactsUser[]>([]);
 
   const signIn = useCallback(async (body: Ilogin) => {
     const res = await Api.post("/session", body);
